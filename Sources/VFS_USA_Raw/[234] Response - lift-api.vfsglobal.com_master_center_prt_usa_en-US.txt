@@ -1,0 +1,162 @@
+HTTP/1.1 200 OK
+Date: Thu, 04 Apr 2024 12:09:06 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+x-amzn-requestid: 9bac4ca1-2991-4979-8c94-de0b9285e97f
+x-amz-apigw-id: VsyIIH3OLPEEurw=
+x-amzn-trace-id: Root=1-660e9700-3ddfb02b56af255e46345585
+via: 1.1 9bd86598a7f45cc948aa2f9674ece0b2.cloudfront.net (CloudFront), 1.1 e4564c21c6bc965b4eea8b7dc0f37cb4.cloudfront.net (CloudFront)
+x-amz-cf-pop: FRA60-P5
+x-amz-cf-pop: MRS52-P4
+vary: Accept-Encoding
+vary: Origin
+x-cache: Hit from cloudfront
+x-amz-cf-id: 47Z1u0ETXoNh7TmqT7T8aSGr1AlRli3tc1xJxJGj-obN0yKyivR8hw==
+Age: 354
+x-xss-protection: 1; mode=block
+x-frame-options: DENY
+referrer-policy: strict-origin-when-cross-origin
+content-security-policy: upgrade-insecure-requests;
+x-content-type-options: nosniff
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+access-control-allow-origin: https://visa.vfsglobal.com
+CF-Cache-Status: DYNAMIC
+Set-Cookie: <redact>
+Set-Cookie: <redact>
+Server: cloudflare
+CF-RAY: 86f1300639bd03fa-LIS
+Content-Encoding: br
+
+[
+  {
+    "id": 231,
+    "masterId": 0,
+    "centerName": "VFS Global for Portugal - New York",
+    "missionCode": "prt",
+    "missionName": "Portugal",
+    "countryCode": "usa",
+    "countryName": "United Sta",
+    "cultureCode": "en-US",
+    "isoCode": "PONY",
+    "city": " New York",
+    "contactNumber": null,
+    "callCenterNumber": "+1 305 704 2172",
+    "address": "128E 32nd Street, 3rd Floor",
+    "state": null,
+    "country": "United Sta",
+    "pincode": "11236",
+    "email": "info.portugalusa@vfsglobal.com",
+    "website": "http://www.vfsglobal.com/portugal/usa/index.html ",
+    "timeZone": "Dateline Standard Time",
+    "vacType": "VAC",
+    "operationHours": "0",
+    "upvFees": 0,
+    "upvCurrency": "USD",
+    "error": null
+  },
+  {
+    "id": 232,
+    "masterId": 0,
+    "centerName": "VFS Global for Portugal - Washington DC",
+    "missionCode": "prt",
+    "missionName": "Portugal",
+    "countryCode": "usa",
+    "countryName": "United Sta",
+    "cultureCode": "en-US",
+    "isoCode": "POWD",
+    "city": "Washington DC",
+    "contactNumber": null,
+    "callCenterNumber": "+1 305 704 2172",
+    "address": "1025 Vermont Ave NW, St#200",
+    "state": null,
+    "country": "United Sta",
+    "pincode": "20005",
+    "email": "info.portugalusa@vfsglobal.com",
+    "website": "http://www.vfsglobal.com/portugal/usa/index.html   ",
+    "timeZone": "Dateline Standard Time",
+    "vacType": "VAC",
+    "operationHours": "0",
+    "upvFees": 0,
+    "upvCurrency": "USD",
+    "error": null
+  },
+  {
+    "id": 233,
+    "masterId": 0,
+    "centerName": "VFS Global for Portugal - San Francisco",
+    "missionCode": "prt",
+    "missionName": "Portugal",
+    "countryCode": "usa",
+    "countryName": "United Sta",
+    "cultureCode": "en-US",
+    "isoCode": "POSF",
+    "city": "San Francisco",
+    "contactNumber": null,
+    "callCenterNumber": "+1 305 704 2172",
+    "address": "642, Harrison Street, Suite 200, San Francisco , CA- 94107",
+    "state": null,
+    "country": "United Sta",
+    "pincode": "94104",
+    "email": "info.portugalusa@vfsglobal.com",
+    "website": "http://www.vfsglobal.com/portugal/usa/index.html",
+    "timeZone": "Dateline Standard Time",
+    "vacType": "VAC",
+    "operationHours": "0",
+    "upvFees": 0,
+    "upvCurrency": "USD",
+    "error": null
+  },
+  {
+    "id": 2054,
+    "masterId": 0,
+    "centerName": "VFS Global for Portugal -Miami",
+    "missionCode": "prt",
+    "missionName": "Portugal",
+    "countryCode": "usa",
+    "countryName": "United Sta",
+    "cultureCode": "en-US",
+    "isoCode": "VACM",
+    "city": "Miami",
+    "contactNumber": null,
+    "callCenterNumber": null,
+    "address": "2655 S Le Jeune Road, PH-1A, Coral Gables, Florida 33134",
+    "state": null,
+    "country": "United Sta",
+    "pincode": null,
+    "email": "info.portugalusa@vfshelpline.com",
+    "website": "https://visa.vfsglobal.com/usa/en/prt",
+    "timeZone": "Dateline Standard Time",
+    "vacType": "VAC",
+    "operationHours": "0",
+    "upvFees": 0,
+    "upvCurrency": "USD",
+    "error": null
+  },
+  {
+    "id": 2055,
+    "masterId": 0,
+    "centerName": "VFS Global for Portugal -Houston",
+    "missionCode": "prt",
+    "missionName": "Portugal",
+    "countryCode": "usa",
+    "countryName": "United Sta",
+    "cultureCode": "en-US",
+    "isoCode": "VACH",
+    "city": "Houston",
+    "contactNumber": null,
+    "callCenterNumber": null,
+    "address": "1001 Texas Ave, 10th Floor, Suite 1020, Houston, TX 77002",
+    "state": null,
+    "country": "United Sta",
+    "pincode": null,
+    "email": "info.portugalusa@vfshelpline.com",
+    "website": null,
+    "timeZone": "Dateline Standard Time",
+    "vacType": "VAC",
+    "operationHours": "0",
+    "upvFees": 0,
+    "upvCurrency": "USD",
+    "error": null
+  }
+]

@@ -1,0 +1,31 @@
+POST /appointment/calendar HTTP/1.1
+Host: lift-api.vfsglobal.com
+Connection: keep-alive
+Content-Length: 177
+Pragma: no-cache
+Cache-Control: no-cache
+sec-ch-ua: "Google Chrome";v="123", "Not:A-Brand";v="8", "Chromium";v="123"
+sec-ch-ua-mobile: ?0
+authorize: ...
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36
+Content-Type: application/json;charset=UTF-8
+Accept: application/json, text/plain, */*
+route: usa/en/prt
+sec-ch-ua-platform: "macOS"
+Origin: https://visa.vfsglobal.com
+Sec-Fetch-Site: same-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: https://visa.vfsglobal.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-GB,en;q=0.9
+
+{
+  "countryCode": "usa",
+  "missionCode": "prt",
+  "centerCode": "POSF",
+  "loginUser": "RICHARD85HUBERXEQ@OUTLOOK.COM",
+  "visaCategoryCode": "NVD",
+  "fromDate": "01/06/2024",
+  "urn": "XYZ56176047857"
+}

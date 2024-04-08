@@ -1,0 +1,17 @@
+OPTIONS /appointment/application HTTP/1.1
+Host: lift-api.vfsglobal.com
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+Accept: */*
+Access-Control-Request-Method: POST
+Access-Control-Request-Headers: authorize,content-type,route
+Origin: https://visa.vfsglobal.com
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36
+Sec-Fetch-Mode: cors
+Sec-Fetch-Site: same-site
+Sec-Fetch-Dest: empty
+Referer: https://visa.vfsglobal.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-GB,en;q=0.9
+

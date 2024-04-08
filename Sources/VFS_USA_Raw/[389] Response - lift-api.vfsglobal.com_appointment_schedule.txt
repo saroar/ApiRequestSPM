@@ -1,0 +1,46 @@
+HTTP/1.1 200 OK
+Date: Thu, 04 Apr 2024 12:15:15 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+vary: Accept-Encoding
+vary: Origin
+x-amzn-requestid: d4254e69-404e-4109-bead-03e51d3879e0
+x-amzn-remapped-content-length: 1352
+x-amzn-remapped-connection: close
+x-amz-apigw-id: Vsz47HFsLPEEHng=
+x-powered-by: Express
+x-amzn-trace-id: Root=1-660e99d2-761f1e0a5dacc8350802cfd6
+_vf_lift: true
+x-amzn-remapped-date: Thu, 04 Apr 2024 12:15:14 GMT
+via: 1.1 84e82c8a6f436c18da1182c07f463906.cloudfront.net (CloudFront), 1.1 2982304f906b538b26d5fd128f6030ec.cloudfront.net (CloudFront)
+x-amz-cf-pop: LIS50-C1
+x-amz-cf-pop: LIS50-P1
+x-cache: Miss from cloudfront
+x-amz-cf-id: 9nHn7dQ6sFyE4mjuHFeQiWl6G395jnw1dOKfjJ2DO-RPcglvnhy2kg==
+x-xss-protection: 1; mode=block
+x-frame-options: DENY
+referrer-policy: strict-origin-when-cross-origin
+content-security-policy: upgrade-insecure-requests;
+x-content-type-options: nosniff
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+access-control-allow-origin: https://visa.vfsglobal.com
+CF-Cache-Status: DYNAMIC
+Set-Cookie: <redact>
+Set-Cookie: <redact>
+Server: cloudflare
+CF-RAY: 86f13902a80f4894-LIS
+Content-Encoding: br
+
+{
+  "IsAppointmentBooked": true,
+  "IsPaymentRequired": true,
+  "RequestRefNo": 1018081206,
+  "URL": "https://online.vfsglobal.com/PG-Component/Payment/PayRequest",
+  "DigitalSignature": "PNIoPXS9BOg2fet_oQmw6RwADfTzZBOvb2-W60KBLc_m7j1MRqGgT0yMfmwYfqXXUDSOzf7ZE_HVBbbHadpxWQ,,",
+  "TokenExpiryDate": null,
+  "appointmentDate": "27/06/2024",
+  "appointmentTime": "12:15",
+  "error": null,
+  "payLoad": "FIe6JK75n0ZY3ZbpAXwBW1PwPZnQLCs3iC0aGh4ZjnkDBMENDfueEsmGsymNzS1nxhPUiRIDULh2EhMaEXoFkBHuqOtDHSw0rl3gVypQZWgG/$vZgMEkCfNBLy5QOh92iiE0tYMtVVzPUAUhZRcywMDqkfYlDrF7g54tg4SELKMCf6YVxgKsyJV$AOZoo9tz4iRgrCjTgDhmrcSdf37df0/RYknpILoNQJoJbr9OZC2xJeeJEvdmu06q0f9JLaP8DubW07is9Vq5vNL4/yrJqm3FSX8dxDp155poL/6VBv4gA5ZDhIuFT6QP1wA7KdgrfucAS91b$5qk3wEDtnHsrnFeuzWuIssrLRsRb5aV4R7$ObdWxTUOsUZzzY4UXxYyYrLCy9jpsMy$cCxcH/zNuSo2Kj73b9aBkg8v/81AMZVo8egkP8qhAnCeVR1Nd0RtSSyjCnACiscrpM3Z5Xs$tRnnpp$6jKYvRA4osZfnpYy11XzUGPHWQa6f6OkL8uNX|5|Lh4H3dqhwfoTcUmTF2H9rg==|0j1ANJu49RbOyTHunqbd2dmf6JIF3Pr8COZWV$8iIc/Fvvca5z6xGlZdZpjmq2Z2mVx7EQ341pg1XY8xSmPYavJTHgEq7nGkYQIpMiJ$J9XMyX4UUo3Yz2NaxNucJIQSp9XoGzRKWLfpqaFFjiDeHjNOY0WuxnvUkt8OPvorZ4YHp4jb5S5qa243/kTSyqHFpcIuBc7yJDCQral9GGf1pmULqCd9nj1VXjkYSr7tOksi$hHN9r2JPG3ev$eq$MFgZl9fUfY5LlEJUx7vvNyygj3lOOSx3PMB21TmHoxP4EpRruofY9MfyQTdxpgD/cR8/wF3IbPUJRZzvlDfvLrRUJrTaVcpUbLad6nXmBGcqGplUO4cgOyAf9Iioogmtz1CyJuFtuR8y$Kpc4ePfWjCKZ0ANU47R$KsPWkAu6JfN$Ua0NgD28MU4bR/Rb1SmBVy"
+}

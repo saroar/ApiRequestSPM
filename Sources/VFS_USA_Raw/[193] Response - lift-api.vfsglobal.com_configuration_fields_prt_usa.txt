@@ -1,0 +1,149 @@
+HTTP/1.1 200 OK
+Date: Thu, 04 Apr 2024 12:07:02 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+x-amzn-requestid: 2d879946-9328-46a4-819d-902265707bba
+x-amz-apigw-id: Vsx_vHa6LPEEPDA=
+x-amzn-trace-id: Root=1-660e96ca-52c5ff5e571e0d07476bf544
+via: 1.1 c1e31c801257ebc563cbb890e887cb1e.cloudfront.net (CloudFront), 1.1 9e1ca2a082cf3304834fbd01d8598ce4.cloudfront.net (CloudFront)
+x-amz-cf-pop: FRA60-P5
+x-amz-cf-pop: MRS52-P4
+vary: Accept-Encoding
+vary: Origin
+x-cache: Hit from cloudfront
+x-amz-cf-id: EARfhcr2ChtBkCtV4iS2nbaOgUt6FTIbVXRTeUeHYKyDbx0dYE--0w==
+Age: 284
+x-xss-protection: 1; mode=block
+x-frame-options: DENY
+referrer-policy: strict-origin-when-cross-origin
+content-security-policy: upgrade-insecure-requests;
+x-content-type-options: nosniff
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+access-control-allow-origin: https://visa.vfsglobal.com
+CF-Cache-Status: DYNAMIC
+Set-Cookie: <redact>
+Set-Cookie: <redact>
+Server: cloudflare
+CF-RAY: 86f12d028f29785c-LIS
+Content-Encoding: br
+
+{
+  "enableDateOfDeperature": false,
+  "enableCourierAddress": true,
+  "enableEndorsedchild": true,
+  "enableBankIntegration": false,
+  "enableVAFIntegration": false,
+  "enableReferenceNumber": false,
+  "walkInOperationHours": "",
+  "xTravelDaysToBeAllowed": "0",
+  "xDaysBeforeDateOfDeparture": "0",
+  "noOfRescheduleEligible": "2",
+  "rescheduleEnabled": true,
+  "allowRescheduleXDaysPriorToAppointment": "0",
+  "allowRescheduleXDaysAfterAppointment": null,
+  "allowRescheduleOnDateOfAppointment": null,
+  "cancellationEnabled": true,
+  "allowCancellationXDaysPriorToAppointment": "0",
+  "allowCancellationXDaysAfterAppointment": null,
+  "allowCancellationOnDateOfAppointment": null,
+  "mainVisaCategoryDisplayEnabled": false,
+  "isDocumentUploadEnabled": false,
+  "isRefundForVASAllowed": false,
+  "allowMaxGroupSize": 0,
+  "isMapFeeScreenRequired": false,
+  "payOnlineEnabled": true,
+  "payAtVACEnabled": false,
+  "payAtBankEnabled": false,
+  "enableEntryType": false,
+  "enableVisaType": false,
+  "enableApplicationType": false,
+  "enableMiddleName": false,
+  "enableNationalityFilterForVisaCategory": false,
+  "enableServiceType": false,
+  "isCSComponentEnabled": false,
+  "enablePassportType": false,
+  "enableConvenienceFee": false,
+  "additionalAllocationCode": null,
+  "isDOBDisabled": false,
+  "isFirstNameDisabled": false,
+  "isLastNameDisabled": false,
+  "isGenderDisabled": false,
+  "isAddressLine1Disabled": false,
+  "isAddressLine2Disabled": true,
+  "isPinCodeDisabled": true,
+  "isCityDisabled": true,
+  "isStateDisabled": true,
+  "isContactNoDisabled": false,
+  "isPassportNoDisabled": false,
+  "isPassportExpiryDateDisabled": false,
+  "isNoShowAllowed": false,
+  "tmiPartnerCode": "",
+  "isOTPEnabled": false,
+  "noOfMaxAllowedApplicant": 5,
+  "enableOTPLoginRegistration": false,
+  "maximumUserOTPAttempt": 3,
+  "isUserActionAuditRequired": false,
+  "isCenterWithSlotsEnabled": false,
+  "isUSAGSSEnabled": false,
+  "GRNValidRegExpression": "",
+  "isnationalIdEnabled": false,
+  "isVisaTokenEnabled": false,
+  "isAtleastVASMandatory": false,
+  "enableIRLNumber": false,
+  "enableFeeExemption": false,
+  "VisaTokenRegExpression": "^[a-zA-Z]{12}$",
+  "isOverSeasEnable": false,
+  "isNationalitySetoptional": false,
+  "isNationalityDLLDisabled": false,
+  "isPassportSetoptional": false,
+  "isPassportexpirySetoptional": false,
+  "NonUKVIToupVASEnabled": false,
+  "enableBuyExtraServices": false,
+  "minConfigurableTime": 30,
+  "isConfirmPassportNumberEnabled": false,
+  "isPolandBelarusScheme": false,
+  "enableMobileNoRegistration": true,
+  "payForWaitlistEnabled": false,
+  "showDateFormat": "dd-MM-yyyy",
+  "enableAutoPopulateNonEditableEmailIdContactNo": false,
+  "enableAddApplicantOTPVirtualKeyboard": false,
+  "enableAddApplicantOTPCloudFlareCaptcha": false,
+  "disableRightClick": false,
+  "enableCloudFlareCaptchaLogin": true,
+  "removeNoOfAttempsLineFromOTP": false,
+  "enableZeroBeforeMobileNoRegistration": false,
+  "isPaymentModeEnabled": false,
+  "tmiOabVas": null,
+  "tmiOabCurrency": null,
+  "isCaptureMobileNumberOTPvalidation": false,
+  "isEnableOTPAuthentication": false,
+  "isTMIDateofBirthEnabled": false,
+  "isTMIAddressFieldEnabled": false,
+  "enableWaitListValidationForNoSlot": false,
+  "maxtimeSessionBooking": "30",
+  "isRegistrationDisabled": false,
+  "isEmailSentDisable": false,
+  "disabledNewBookingForCCUser": false,
+  "disabledRescheduleApptForCCUser": false,
+  "disabledResendConfLetterForCCUser": false,
+  "disabledPrintApptForCCUser": false,
+  "disabledCancelApptForCCUser": false,
+  "noOfApplicantsToBeUploadedForTABulkAppointment": 0,
+  "noOfDraftRecordsPerTABulkAppointment": 0,
+  "isPhotoVerificationRequired": false,
+  "enablePersonalOnRegistration": false,
+  "usagssNEFTPaymentExpiryTime": "",
+  "isBelgiumHandshakeEnabled": false,
+  "isAustraliaCC": false,
+  "enableBulkAppointment": true,
+  "enableTaPaymentDropdown": false,
+  "TA_IS_Draft_Required": false,
+  "enableDisplayApplicantWiseSummary": false,
+  "passportExpiryDate": 180,
+  "isFacialVerificationOnlyFor1stAdultApplicant": false,
+  "IdleSessionTimeoutDurationMin": 5,
+  "IdleSessionWarningDurationSec": 60,
+  "isShuffledVirtualKeyboard": false,
+  "error": null
+}

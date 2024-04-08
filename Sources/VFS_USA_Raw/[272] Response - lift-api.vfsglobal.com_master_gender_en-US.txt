@@ -1,0 +1,34 @@
+HTTP/1.1 200 OK
+Date: Thu, 04 Apr 2024 12:09:29 GMT
+Content-Type: application/json
+Content-Length: 3
+Connection: keep-alive
+x-amzn-requestid: ce767c8e-60a8-47a9-97a0-078c6c57e4cd
+x-amz-apigw-id: VsyHAF7-rPEEIkw=
+x-amzn-trace-id: Root=1-660e96f9-26d3eea9123418f941a7b47f
+via: 1.1 dc57cbf9d7336ae929f762b5ada2ed98.cloudfront.net (CloudFront), 1.1 12462511bf75e25d997040c6b0156390.cloudfront.net (CloudFront)
+x-amz-cf-pop: FRA60-P5
+x-amz-cf-pop: MRS52-P4
+x-cache: Hit from cloudfront
+x-amz-cf-id: uARyQx2hbWyTQ-LgW5W0zZjY3oDm8U17rfu22fdMpKy7T4000pIMpg==
+Age: 384
+x-xss-protection: 1; mode=block
+x-frame-options: DENY
+referrer-policy: strict-origin-when-cross-origin
+content-security-policy: upgrade-insecure-requests;
+x-content-type-options: nosniff
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+access-control-allow-origin: https://visa.vfsglobal.com
+access-control-allow-methods: GET
+vary: Access-Control-Request-Method
+vary: Origin
+vary: Access-Control-Request-Headers
+access-control-max-age: 600
+access-control-allow-headers: *
+CF-Cache-Status: DYNAMIC
+Set-Cookie: <redact>
+Set-Cookie: <redact>
+Server: cloudflare
+CF-RAY: 86f13098fae303ea-LIS
+
+{}

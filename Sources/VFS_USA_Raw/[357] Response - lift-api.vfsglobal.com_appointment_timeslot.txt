@@ -1,0 +1,82 @@
+HTTP/1.1 200 OK
+Date: Thu, 04 Apr 2024 12:13:38 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+x-amzn-requestid: 9757a44b-b2a3-4aab-88e8-ea4fefe8d097
+x-amzn-remapped-content-length: 1065
+x-amzn-remapped-connection: close
+x-amz-apigw-id: Vszp2GJYrPEEq9Q=
+x-powered-by: Express
+x-amzn-trace-id: Root=1-660e9971-7683dceb397766c17501b3d7
+_vf_lift: true
+x-amzn-remapped-date: Thu, 04 Apr 2024 12:13:38 GMT
+via: 1.1 5e318b3ea3fa81a8c20898c2f8c40e7c.cloudfront.net (CloudFront), 1.1 478446fb4d72a1fd99b9a7a5157265f4.cloudfront.net (CloudFront)
+x-amz-cf-pop: ZRH50-C1
+x-amz-cf-pop: ZRH55-P1
+x-cache: Miss from cloudfront
+x-amz-cf-id: VKsoy9heLmKSdWh-wcTzjZ2vQH7d5hGbE66MduJBUZHiIs4-LwUnUg==
+x-xss-protection: 1; mode=block
+x-frame-options: DENY
+referrer-policy: strict-origin-when-cross-origin
+content-security-policy: upgrade-insecure-requests;
+x-content-type-options: nosniff
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+access-control-allow-origin: https://visa.vfsglobal.com
+vary: Origin
+CF-Cache-Status: DYNAMIC
+Set-Cookie: <redact>
+Set-Cookie: <redact>
+Server: cloudflare
+CF-RAY: 86f136a76d00691e-LIS
+Content-Encoding: br
+
+{
+  "mission": "Portugal",
+  "center": "VFS Global for Portugal - San Francisco",
+  "visacategory": "NVD",
+  "date": "06/27/2024",
+  "slots": [
+    {
+      "visaGroupName": "SFO- Visa application center",
+      "allocationId": 11447885,
+      "slot": "12:30-13:00",
+      "type": "Normal",
+      "allocationCategory": "Portugal Visa Application - SFO",
+      "categoryCode": "VAC"
+    },
+    {
+      "visaGroupName": "SFO- Visa application center",
+      "allocationId": 11447883,
+      "slot": "12:00-12:30",
+      "type": "Normal",
+      "allocationCategory": "Portugal Visa Application - SFO",
+      "categoryCode": "VAC"
+    },
+    {
+      "visaGroupName": "SFO- Visa application center",
+      "allocationId": 11447882,
+      "slot": "11:40-12:00",
+      "type": "Normal",
+      "allocationCategory": "Portugal Visa Application - SFO",
+      "categoryCode": "VAC"
+    },
+    {
+      "visaGroupName": "SFO- Visa application center",
+      "allocationId": 11447884,
+      "slot": "12:15-12:30",
+      "type": "Normal",
+      "allocationCategory": "Portugal Visa Application - SFO",
+      "categoryCode": "VAC"
+    },
+    {
+      "visaGroupName": "SFO- Visa application center",
+      "allocationId": 11447877,
+      "slot": "9:00-9:30",
+      "type": "Normal",
+      "allocationCategory": "Portugal Visa Application - SFO",
+      "categoryCode": "VAC"
+    }
+  ],
+  "error": null
+}

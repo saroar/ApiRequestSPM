@@ -1,0 +1,40 @@
+HTTP/1.1 200 OK
+Date: Thu, 04 Apr 2024 12:07:55 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+x-amzn-requestid: 7426f904-e7e8-4adf-9940-167a2d103dd9
+x-amzn-remapped-content-length: 71
+x-amzn-remapped-connection: close
+x-amz-apigw-id: Vsy0REGuLPEEHog=
+x-powered-by: Express
+x-amzn-trace-id: Root=1-660e981b-20c6b6af6ba58d5351217298
+_vf_lift: true
+x-amzn-remapped-date: Thu, 04 Apr 2024 12:07:55 GMT
+via: 1.1 c06f5d2130689f511352f5187fabf420.cloudfront.net (CloudFront), 1.1 830a57eccbd3fe5dbe1beff515179f28.cloudfront.net (CloudFront)
+x-amz-cf-pop: MRS52-P1
+x-amz-cf-pop: MRS52-P4
+x-cache: Miss from cloudfront
+x-amz-cf-id: EXWOQGU2cx0bhBehc6AD6WwSRSYI488HMdDaVWi6tbP72OlHWgGXFA==
+x-xss-protection: 1; mode=block
+x-frame-options: DENY
+referrer-policy: strict-origin-when-cross-origin
+content-security-policy: upgrade-insecure-requests;
+x-content-type-options: nosniff
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+access-control-allow-origin: https://visa.vfsglobal.com
+vary: Origin
+CF-Cache-Status: DYNAMIC
+Set-Cookie: <redact>
+Set-Cookie: <redact>
+Server: cloudflare
+CF-RAY: 86f12e48f9eb7110-LIS
+Content-Encoding: br
+
+{
+  "data": null,
+  "error": {
+    "code": 1041,
+    "description": "No Applicant exists"
+  }
+}

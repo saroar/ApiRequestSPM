@@ -1,0 +1,89 @@
+POST /appointment/applicants HTTP/1.1
+Pragma: no-cache
+Cache-Control: no-cache
+sec-ch-ua: "Google Chrome";v="123", "Not:A-Brand";v="8", "Chromium";v="123"
+sec-ch-ua-mobile: ?0
+authorize: EAAAAJpZAEk8dAC5JkHbQJ8eofpqxqRKAiseAYYOo0l/IH+p+zn8asnmtt89jMcyxjKmGiHulmS/iaVWdc4G8aP2DRQxCjpqfSaBjRVsZaFXm0OFKKVqaDtwbCbTFGy1pC6zdVe0kX/EZe7whUGR9xsNZnFhFseHNODo3EVPmwB5uZyQIXGIVaUYg4SxcA1w3sh8Ux2Ayoh89Ky7uyC5JbuKGOwuIVomcj+4Gr+LnPPkZ5UmBfSazpXn5FB+9IemkU8dWzJFWW9v4wh/iYQd7hBjpvLTJTePmTfPAwPcYFKw0H9BrxiGtUrowu+ZMHyuIkdzilx8EpvLCH9D4WoCIGfa7jxM/ZZRio0V29jjkPsBXIpQpDzzU3NpnhZ0acexsYCqCxo/ZTu/2mYv2bHa754qIELCnXUTQIvemNVXjFvz1lL7QZcSw3/iCAeaHBxymVKIesIoarvlZ1rEMMAPfEiYg+4HHke3XOEBYB0Cgx9zCEdNiv9t121R6Bq8zANm++1PzeG9OqUruDuD5JtXZanMd71xdUtgqxyqXXIR6MNO3cGND94AAT27XNVUmE/9Ugdr3Q==
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36
+Content-Type: application/json;charset=UTF-8
+Accept: application/json, text/plain, */*
+route: usa/en/prt
+sec-ch-ua-platform: "macOS"
+Origin: https://visa.vfsglobal.com
+Sec-Fetch-Site: same-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: https://visa.vfsglobal.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-GB,en;q=0.9
+Postman-Token: eba4bb86-98cd-4798-81d9-ffe0c36325e3
+Host: lift-api.vfsglobal.com
+Connection: keep-alive
+Content-Length: 1367
+
+{
+  "countryCode": "usa",
+  "missionCode": "prt",
+  "centerCode": "POSF",
+  "loginUser": "RICHARD85HUBERXEQ@OUTLOOK.COM",
+  "visaCategoryCode": "NVD",
+  "isEdit": false,
+  "feeEntryTypeCode": null,
+  "feeExemptionTypeCode": null,
+  "feeExemptionDetailsCode": null,
+  "applicantList": [
+    {
+      "urn": "",
+      "arn": "",
+      "loginUser": "RICHARD85HUBERXEQ@OUTLOOK.COM",
+      "firstName": "ALI",
+      "employerFirstName": "",
+      "middleName": "",
+      "lastName": "KHANA",
+      "employerLastName": "",
+      "salutation": "",
+      "gender": 1,
+      "nationalId": null,
+      "VisaToken": null,
+      "employerContactNumber": "",
+      "contactNumber": "12342142",
+      "dialCode": "33",
+      "employerDialCode": "",
+      "passportNumber": "AG9821412",
+      "confirmPassportNumber": "",
+      "passportExpirtyDate": "12/04/2028",
+      "dateOfBirth": "25/04/2002",
+      "emailId": "ALI@GMAIL.COM",
+      "employerEmailId": "",
+      "nationalityCode": "DZA",
+      "state": null,
+      "city": null,
+      "isEndorsedChild": false,
+      "applicantType": 0,
+      "addressline1": "SOME ADDRESS ALLWAYS NEDED",
+      "addressline2": null,
+      "pincode": null,
+      "referenceNumber": null,
+      "vlnNumber": null,
+      "applicantGroupId": 0,
+      "parentPassportNumber": "",
+      "parentPassportExpiry": "",
+      "dateOfDeparture": null,
+      "gwfNumber": "",
+      "entryType": "",
+      "eoiVisaType": "",
+      "passportType": "",
+      "vfsReferenceNumber": "",
+      "familyReunificationCerificateNumber": "",
+      "PVRequestRefNumber": "",
+      "PVStatus": "",
+      "PVStatusDescription": "",
+      "PVCanAllowRetry": true,
+      "PVisVerified": false,
+      "eefRegistrationNumber": "",
+      "ipAddress": "109.49.186.85"
+    }
+  ],
+  "languageCode": "en-US",
+  "isWaitlist": false
+}

@@ -1,0 +1,469 @@
+HTTP/1.1 200 OK
+Date: Thu, 04 Apr 2024 12:13:33 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+x-amzn-requestid: dab97f3a-48df-4970-a791-0aaa80ec27b1
+x-amzn-remapped-content-length: 4401
+x-amzn-remapped-connection: close
+x-amz-apigw-id: VszpHEAfLPEEd_Q=
+x-powered-by: Express
+x-amzn-trace-id: Root=1-660e996d-2935e77d4546772d7cdedc1b
+_vf_lift: true
+x-amzn-remapped-date: Thu, 04 Apr 2024 12:13:33 GMT
+via: 1.1 27fe4928fb2081beeb65fdbf439bb418.cloudfront.net (CloudFront), 1.1 3d994808da6a9ce8c9e7b1364fa689ea.cloudfront.net (CloudFront)
+x-amz-cf-pop: ZRH50-C1
+x-amz-cf-pop: ZRH55-P1
+x-cache: Miss from cloudfront
+x-amz-cf-id: V0qQ1ieZVpX_vO42WOP6_f7sATFA7L00D--pKyE9RKHnwLwRZlrhzg==
+x-xss-protection: 1; mode=block
+x-frame-options: DENY
+referrer-policy: strict-origin-when-cross-origin
+content-security-policy: upgrade-insecure-requests;
+x-content-type-options: nosniff
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+access-control-allow-origin: https://visa.vfsglobal.com
+vary: Origin
+CF-Cache-Status: DYNAMIC
+Set-Cookie: <redact>
+Set-Cookie: <redact>
+Server: cloudflare
+CF-RAY: 86f1368aaaee785f-LIS
+Content-Encoding: br
+
+{
+  "mission": "Portugal",
+  "center": "VFS Global for Portugal - San Francisco",
+  "visacategory": "NVD",
+  "calendars": [
+    {
+      "date": "06/11/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/11/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/11/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/11/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/11/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/11/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/11/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/12/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/12/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/12/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/12/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/12/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/12/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/12/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/12/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/12/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/12/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/13/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/13/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/13/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/13/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/13/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/13/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/13/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/13/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/13/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/13/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/14/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/14/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/14/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/14/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/17/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/17/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/17/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/17/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/17/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/17/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/17/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/17/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/17/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/17/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/18/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/18/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/18/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/18/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/19/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/19/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/19/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/19/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/20/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/20/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/20/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/20/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/20/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/20/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/20/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/20/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/20/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/20/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/21/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/21/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/21/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/21/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/21/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/21/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/21/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/21/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/21/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/24/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/24/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/24/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/24/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/24/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/24/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/24/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/24/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/25/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/25/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/25/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/25/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/25/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/25/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/25/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/25/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/25/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/25/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/26/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/26/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/26/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/26/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/26/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/26/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/26/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/26/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/26/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/26/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/27/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/27/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/27/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/27/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/27/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/28/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/28/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/28/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/28/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/28/2024",
+      "isWeekend": false
+    },
+    {
+      "date": "06/28/2024",
+      "isWeekend": false
+    }
+  ],
+  "error": null
+}

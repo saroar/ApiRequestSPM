@@ -1,0 +1,43 @@
+HTTP/1.1 200 OK
+Date: Thu, 04 Apr 2024 12:10:21 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+x-amzn-requestid: ed5ce64f-1d07-4d97-a3a2-023ec9a964f0
+x-amz-apigw-id: VszLIGoqLPEEVgw=
+x-amzn-trace-id: Root=1-660e98ad-56afbbbb53f754774f4655a3
+via: 1.1 ce698fda3f892ed6ad58fa176c04a520.cloudfront.net (CloudFront), 1.1 c0ec38d1888eee986b8ba3b8834111c6.cloudfront.net (CloudFront)
+x-amz-cf-pop: MRS52-P1
+x-amz-cf-pop: MRS52-P4
+x-cache: Miss from cloudfront
+x-amz-cf-id: u85slAStl5wwy8N23W2cC9VOkmAnqiJHk5sRDlipG7tdve6_Ni9bXA==
+x-xss-protection: 1; mode=block
+x-frame-options: DENY
+referrer-policy: strict-origin-when-cross-origin
+content-security-policy: upgrade-insecure-requests;
+x-content-type-options: nosniff
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+access-control-allow-origin: https://visa.vfsglobal.com
+vary: Origin
+CF-Cache-Status: DYNAMIC
+Set-Cookie: <redact>
+Set-Cookie: <redact>
+Server: cloudflare
+CF-RAY: 86f131db3f5403de-LIS
+Content-Encoding: br
+
+{
+  "urn": "XYZ56176047857",
+  "applicantList": [
+    {
+      "arn": "XYZ56176047857/1",
+      "firstName": "ALI",
+      "lastName": "KHANA",
+      "passportNumber": "AG9821412",
+      "isPackagePurchaseMandatory": false,
+      "isPhotoUpload": false
+    }
+  ],
+  "status": null,
+  "error": null
+}

@@ -1,0 +1,27 @@
+HTTP/1.1 200 OK
+Date: Thu, 04 Apr 2024 12:09:28 GMT
+Content-Type: application/json
+Content-Length: 3
+Connection: keep-alive
+x-amzn-requestid: e9e494d7-59ca-44e4-a532-fe9074dc244b
+access-control-allow-origin: *
+access-control-allow-headers: *
+x-amz-apigw-id: VszC2GS7LPEEf1A=
+access-control-allow-methods: POST,GET,OPTIONS
+x-amzn-trace-id: Root=1-660e9878-320a0e5b024845547324ac77
+via: 1.1 934815569b3b6127560be81f148ef706.cloudfront.net (CloudFront), 1.1 a11f93e45c1a7b9606ad3f2a08156aaa.cloudfront.net (CloudFront)
+x-amz-cf-pop: FRA60-P5
+x-amz-cf-pop: MRS52-P4
+x-cache: Miss from cloudfront
+x-amz-cf-id: VNpkW861G4lMZ0rjNg9MpslNfKS7JD-7bD3vlD40gbQFTG2gbDdXxw==
+CF-Cache-Status: DYNAMIC
+Set-Cookie: <redact>
+Report-To: {"endpoints":[{"url":"https:\/\/csp-reporting.cloudflare.com\/cdn-cgi\/script_monitor\/report?m=BYnr5EaR_yhUkz_hHj0eJ5R9DzwB5f7G97Bq0EYYnkg-1712232568-1.0.1.1-KfttzDE_srtA9xZKt8xnrcGFCKQCiXCME2nZjCG_3MREycNSZCo02elAlUkGfHVsHwN6i.oBqGYCLQHOhNh5QFJn2axMI.Rx5Z5ko6KEJEclKx486Ahf7c5TmvJ.oRTmZHbcjal25gxwVzRVV0FSiT2H8mQ0qU5xQvgpeg2N0t8"}],"group":"cf-csp-endpoint","max_age":86400}
+Content-Security-Policy-Report-Only: script-src 'none'; connect-src 'none'; report-uri https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report?m=BYnr5EaR_yhUkz_hHj0eJ5R9DzwB5f7G97Bq0EYYnkg-1712232568-1.0.1.1-KfttzDE_srtA9xZKt8xnrcGFCKQCiXCME2nZjCG_3MREycNSZCo02elAlUkGfHVsHwN6i.oBqGYCLQHOhNh5QFJn2axMI.Rx5Z5ko6KEJEclKx486Ahf7c5TmvJ.oRTmZHbcjal25gxwVzRVV0FSiT2H8mQ0qU5xQvgpeg2N0t8; report-to cf-csp-endpoint
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+X-Content-Type-Options: nosniff
+Set-Cookie: <redact>
+Server: cloudflare
+CF-RAY: 86f1308f7f6a03de-LIS
+
+{}

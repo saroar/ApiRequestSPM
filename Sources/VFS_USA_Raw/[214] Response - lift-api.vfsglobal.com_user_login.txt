@@ -1,0 +1,62 @@
+HTTP/1.1 200 OK
+Date: Thu, 04 Apr 2024 12:07:53 GMT
+Content-Type: application/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+x-amzn-requestid: fce60e65-21f0-4182-b1dc-e2542a0e16c8
+x-amzn-remapped-content-length: 1239
+x-amzn-remapped-connection: close
+x-amz-apigw-id: Vsyz3GhZLPEEifw=
+x-powered-by: Express
+x-amzn-trace-id: Root=1-660e9818-7b3b1ea64133f9372c076f39
+_vf_lift: true
+x-amzn-remapped-date: Thu, 04 Apr 2024 12:07:52 GMT
+via: 1.1 12e8a42696c6144c3ba187fe90f98448.cloudfront.net (CloudFront), 1.1 cd436c4b56d76ad1cb04b447a4cd9cfe.cloudfront.net (CloudFront)
+x-amz-cf-pop: MRS52-P1
+x-amz-cf-pop: MRS52-P4
+x-cache: Miss from cloudfront
+x-amz-cf-id: fviDReYvjCn5R205jvMLsRAqQVmE8IlBW321nd_Vpjadej8-wLc3HA==
+x-xss-protection: 1; mode=block
+x-frame-options: DENY
+referrer-policy: strict-origin-when-cross-origin
+content-security-policy: upgrade-insecure-requests;
+x-content-type-options: nosniff
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+access-control-allow-origin: https://visa.vfsglobal.com
+vary: Origin
+CF-Cache-Status: DYNAMIC
+Set-Cookie: <redact>
+Set-Cookie: <redact>
+Server: cloudflare
+CF-RAY: 86f12e387b7334b4-LIS
+Content-Encoding: br
+
+{
+  "accessToken": "EAAAAJpZAEk8dAC5JkHbQJ8eofpqxqRKAiseAYYOo0l/IH+p+zn8asnmtt89jMcyxjKmGiHulmS/iaVWdc4G8aP2DRQxCjpqfSaBjRVsZaFXm0OFKKVqaDtwbCbTFGy1pC6zdVe0kX/EZe7whUGR9xsNZnFhFseHNODo3EVPmwB5uZyQIXGIVaUYg4SxcA1w3sh8Ux2Ayoh89Ky7uyC5JbuKGOwuIVomcj+4Gr+LnPPkZ5UmBfSazpXn5FB+9IemkU8dWzJFWW9v4wh/iYQd7hBjpvLTJTePmTfPAwPcYFKw0H9BrxiGtUrowu+ZMHyuIkdzilx8EpvLCH9D4WoCIGfa7jxM/ZZRio0V29jjkPsBXIpQpDzzU3NpnhZ0acexsYCqCxo/ZTu/2mYv2bHa754qIELCnXUTQIvemNVXjFvz1lL7QZcSw3/iCAeaHBxymVKIesIoarvlZ1rEMMAPfEiYg+4HHke3XOEBYB0Cgx9zCEdNiv9t121R6Bq8zANm++1PzeG9OqUruDuD5JtXZanMd71xdUtgqxyqXXIR6MNO3cGND94AAT27XNVUmE/9Ugdr3Q==",
+  "isAuthenticated": true,
+  "nearestVACCountryCode": null,
+  "FailedAttemptCount": 0,
+  "isAppointmentBooked": false,
+  "isLastTransactionPending": false,
+  "isAppointmentExpired": false,
+  "isLimitedDashboard": false,
+  "isROCompleted": false,
+  "isSOCompleted": false,
+  "roleName": "Individual",
+  "isUkraineScheme": false,
+  "isUkraineSchemeDocumentUpload": false,
+  "loginUser": "richard85huberxeq@outlook.com",
+  "dialCode": "1",
+  "contactNumber": "7025684443",
+  "remainingCount": 0,
+  "accountLockHours": 2,
+  "enableOTPAuthentication": false,
+  "isNewUser": false,
+  "taResetPWDToken": null,
+  "firstName": "",
+  "lastName": "",
+  "dateOfBirth": "",
+  "isPasswordExpiryMessage": false,
+  "PasswordExpirydays": 0,
+  "error": null
+}

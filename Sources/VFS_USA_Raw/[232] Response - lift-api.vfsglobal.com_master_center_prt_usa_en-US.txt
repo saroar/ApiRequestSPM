@@ -1,0 +1,36 @@
+HTTP/1.1 200 OK
+Date: Thu, 04 Apr 2024 12:09:06 GMT
+Content-Type: application/json
+Content-Length: 3
+Connection: keep-alive
+x-amzn-requestid: 9e8c8c92-8b12-4e82-81e6-e505a3af925c
+x-amz-apigw-id: VsyH8H55LPEEgSQ=
+x-amzn-trace-id: Root=1-660e96ff-72490abe6ede27d079080209
+via: 1.1 5b17764336ffdab7d2a3e7707394867a.cloudfront.net (CloudFront), 1.1 e4564c21c6bc965b4eea8b7dc0f37cb4.cloudfront.net (CloudFront)
+x-amz-cf-pop: FRA60-P5
+x-amz-cf-pop: MRS52-P4
+x-cache: Hit from cloudfront
+x-amz-cf-id: SjXIVjhwRWM7dTJtKhOLVLn7WjWwITdPoITf30J7jwxahLUat_r7Tg==
+Age: 355
+x-xss-protection: 1; mode=block
+x-frame-options: DENY
+referrer-policy: strict-origin-when-cross-origin
+content-security-policy: upgrade-insecure-requests;
+x-content-type-options: nosniff
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+access-control-allow-origin: https://visa.vfsglobal.com
+access-control-allow-methods: GET
+vary: Access-Control-Request-Method
+vary: Origin
+vary: Access-Control-Request-Headers
+access-control-max-age: 600
+access-control-allow-headers: *
+CF-Cache-Status: DYNAMIC
+Set-Cookie: <redact>
+Report-To: {"endpoints":[{"url":"https:\/\/csp-reporting.cloudflare.com\/cdn-cgi\/script_monitor\/report?m=wX6evVVvOGosXFDs1igNrmbG_ijFomgpD3fcX9sULww-1712232546-1.0.1.1-YnPBf5BpGE_RPP0JSaTG6iEczSZx2WHGEHzPkqivFNSW4KMBfXEcM55e77LlAwj.jCp3fqzIR6is9_aEbS.N1YK.V.YV2J7fRYEaJQbkbvFHfeDlrCgVbmRjZHQAocRf29wEEISpzSHIZ2mw37xf7r8wBzfE03LyHZbTIJXJulE"}],"group":"cf-csp-endpoint","max_age":86400}
+Content-Security-Policy-Report-Only: script-src 'none'; report-uri https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report?m=wX6evVVvOGosXFDs1igNrmbG_ijFomgpD3fcX9sULww-1712232546-1.0.1.1-YnPBf5BpGE_RPP0JSaTG6iEczSZx2WHGEHzPkqivFNSW4KMBfXEcM55e77LlAwj.jCp3fqzIR6is9_aEbS.N1YK.V.YV2J7fRYEaJQbkbvFHfeDlrCgVbmRjZHQAocRf29wEEISpzSHIZ2mw37xf7r8wBzfE03LyHZbTIJXJulE; report-to cf-csp-endpoint
+Set-Cookie: <redact>
+Server: cloudflare
+CF-RAY: 86f13005b92803fa-LIS
+
+{}

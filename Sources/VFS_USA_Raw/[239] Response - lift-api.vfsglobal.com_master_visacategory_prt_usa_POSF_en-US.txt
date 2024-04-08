@@ -1,0 +1,86 @@
+HTTP/1.1 200 OK
+Date: Thu, 04 Apr 2024 12:09:17 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+x-amzn-requestid: 5be0e7bf-d7d1-48c3-83f1-ff5fb5d60f7b
+x-amz-apigw-id: VsyLhEFjrPEEXTA=
+x-amzn-trace-id: Root=1-660e9716-336d38b41220ed7628cd07f4
+via: 1.1 628e5146add9b3daeb91ab8792398818.cloudfront.net (CloudFront), 1.1 96e54f255e90f297c13fec7ba0745ecc.cloudfront.net (CloudFront)
+x-amz-cf-pop: FRA60-P5
+x-amz-cf-pop: MRS52-P4
+vary: Accept-Encoding
+vary: Origin
+x-cache: Hit from cloudfront
+x-amz-cf-id: lsG43XqhF8kXo3lk4r0pWATEEueHoGSZMb0EGpT2e0TI51r7Z3MeTQ==
+Age: 343
+x-xss-protection: 1; mode=block
+x-frame-options: DENY
+referrer-policy: strict-origin-when-cross-origin
+content-security-policy: upgrade-insecure-requests;
+x-content-type-options: nosniff
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+access-control-allow-origin: https://visa.vfsglobal.com
+CF-Cache-Status: DYNAMIC
+Set-Cookie: <redact>
+Set-Cookie: <redact>
+Server: cloudflare
+CF-RAY: 86f1304aae4003c2-LIS
+Content-Encoding: br
+
+[
+  {
+    "id": 5090,
+    "parentId": 0,
+    "masterId": 0,
+    "name": "Portugal Visa Application",
+    "missionCode": "prt",
+    "centerCode": "POSF",
+    "code": "PVAC",
+    "culturecode": "en-US",
+    "iswaitlist": false,
+    "isTMIEnabled": false,
+    "isVLNNumberEnable": false,
+    "vlnNumberRegex": null,
+    "vlnNumberLabelFormat": null,
+    "enableReferenceNumber": false,
+    "isApplicantDocumentUploadEnabled": false,
+    "isReferenceNumberWithPassportEnabled": false,
+    "IsMaltaExtServiceConsentsEnabled": false,
+    "isApplicantOTPEnabled": false,
+    "isMaltaFamilyReunificationEnabled": false,
+    "isEmployerDetailsRequired": false,
+    "isMIGRISNumberEnabled": false,
+    "description": null,
+    "isEEFRegistrationEnabled": false,
+    "eefNumberRegex": null,
+    "error": null
+  },
+  {
+    "id": 8200,
+    "parentId": 0,
+    "masterId": 0,
+    "name": "Portugal Long Stay",
+    "missionCode": "prt",
+    "centerCode": "POSF",
+    "code": "PLS",
+    "culturecode": "en-US",
+    "iswaitlist": false,
+    "isTMIEnabled": false,
+    "isVLNNumberEnable": false,
+    "vlnNumberRegex": null,
+    "vlnNumberLabelFormat": null,
+    "enableReferenceNumber": false,
+    "isApplicantDocumentUploadEnabled": false,
+    "isReferenceNumberWithPassportEnabled": false,
+    "IsMaltaExtServiceConsentsEnabled": false,
+    "isApplicantOTPEnabled": false,
+    "isMaltaFamilyReunificationEnabled": false,
+    "isEmployerDetailsRequired": false,
+    "isMIGRISNumberEnabled": false,
+    "description": null,
+    "isEEFRegistrationEnabled": false,
+    "eefNumberRegex": null,
+    "error": null
+  }
+]

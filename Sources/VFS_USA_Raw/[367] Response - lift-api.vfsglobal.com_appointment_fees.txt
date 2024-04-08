@@ -1,0 +1,53 @@
+HTTP/1.1 200 OK
+Date: Thu, 04 Apr 2024 12:13:51 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+x-amzn-requestid: 7529c678-e9ae-4dcc-8985-3d7276be0b15
+x-amz-apigw-id: Vszr8FwaLPEEfxA=
+x-amzn-trace-id: Root=1-660e997f-352284066dc58a6735fcef7f
+via: 1.1 54ba4737103cb6263e414e602fbbe752.cloudfront.net (CloudFront), 1.1 baaa01540e8048678da317f40119ee06.cloudfront.net (CloudFront)
+x-amz-cf-pop: MRS52-P1
+x-amz-cf-pop: MRS52-P4
+x-cache: Miss from cloudfront
+x-amz-cf-id: 47Zph6Fcb7yjH3njFOLBsAR9wHPjJ-UVN_59deJEIZV0Sq5koghJ5Q==
+x-xss-protection: 1; mode=block
+x-frame-options: DENY
+referrer-policy: strict-origin-when-cross-origin
+content-security-policy: upgrade-insecure-requests;
+x-content-type-options: nosniff
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+access-control-allow-origin: https://visa.vfsglobal.com
+vary: Origin
+CF-Cache-Status: DYNAMIC
+Set-Cookie: <redact>
+Set-Cookie: <redact>
+Server: cloudflare
+CF-RAY: 86f136fb7e2f48aa-LIS
+Content-Encoding: br
+
+{
+  "mission": "prt",
+  "country": "usa",
+  "center": "POSF",
+  "totalamount": 41.15,
+  "totalSGSTCollected": 0,
+  "totalCGSTCollected": 0,
+  "totalIGSTCollected": 0,
+  "totalCalamityCessCollected": 0,
+  "feeDetails": [
+    {
+      "feeId": 1942552,
+      "feeTypeId": 1,
+      "feeName": "VFS Service Charge",
+      "feeTypeCode": "VFSFEE",
+      "feeAmount": 41.15,
+      "discountAmount": 0,
+      "currency": "USD",
+      "FeeTax": []
+    }
+  ],
+  "servicesFee": null,
+  "additionalFee": null,
+  "error": null
+}

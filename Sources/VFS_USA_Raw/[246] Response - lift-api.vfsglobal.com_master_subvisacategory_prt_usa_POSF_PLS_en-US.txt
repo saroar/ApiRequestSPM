@@ -1,0 +1,112 @@
+HTTP/1.1 200 OK
+Date: Thu, 04 Apr 2024 12:09:21 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+x-amzn-requestid: 6f1b28fc-446e-4be5-80b4-8ef3c948bae2
+x-amz-apigw-id: VszBzFW-LPEEWIg=
+x-amzn-trace-id: Root=1-660e9871-7aa9681c31c311b3503a84fd
+via: 1.1 f192553c835240a9b5df520fb7ffd876.cloudfront.net (CloudFront), 1.1 b3bfeb8eb7405a05775de8861a4d117c.cloudfront.net (CloudFront)
+x-amz-cf-pop: FRA60-P5
+x-amz-cf-pop: FRA60-P2
+vary: Accept-Encoding
+vary: Origin
+x-cache: Miss from cloudfront
+x-amz-cf-id: KAiwOnvwuo7mKPqUerRAUCMwSXN22ccYCTLXcWJ1UqYUuzDnmEJwQQ==
+x-xss-protection: 1; mode=block
+x-frame-options: DENY
+referrer-policy: strict-origin-when-cross-origin
+content-security-policy: upgrade-insecure-requests;
+x-content-type-options: nosniff
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+access-control-allow-origin: https://visa.vfsglobal.com
+CF-Cache-Status: DYNAMIC
+Set-Cookie: <redact>
+Set-Cookie: <redact>
+Server: cloudflare
+CF-RAY: 86f1306578bf4891-LIS
+Content-Encoding: br
+
+[
+  {
+    "id": 5548,
+    "parentId": 8200,
+    "masterId": 0,
+    "name": "National Visa D",
+    "missionCode": "prt",
+    "centerCode": "POSF",
+    "code": "NVD",
+    "culturecode": "en-US",
+    "iswaitlist": false,
+    "isTMIEnabled": false,
+    "isVLNNumberEnable": false,
+    "vlnNumberRegex": null,
+    "vlnNumberLabelFormat": null,
+    "enableReferenceNumber": false,
+    "isApplicantDocumentUploadEnabled": false,
+    "isReferenceNumberWithPassportEnabled": false,
+    "IsMaltaExtServiceConsentsEnabled": false,
+    "isApplicantOTPEnabled": false,
+    "isMaltaFamilyReunificationEnabled": false,
+    "isEmployerDetailsRequired": false,
+    "isMIGRISNumberEnabled": false,
+    "description": null,
+    "isEEFRegistrationEnabled": false,
+    "eefNumberRegex": null,
+    "error": null
+  },
+  {
+    "id": 7232,
+    "parentId": 8200,
+    "masterId": 0,
+    "name": "Resident Permit",
+    "missionCode": "prt",
+    "centerCode": "POSF",
+    "code": "RP",
+    "culturecode": "en-US",
+    "iswaitlist": false,
+    "isTMIEnabled": false,
+    "isVLNNumberEnable": false,
+    "vlnNumberRegex": null,
+    "vlnNumberLabelFormat": null,
+    "enableReferenceNumber": false,
+    "isApplicantDocumentUploadEnabled": false,
+    "isReferenceNumberWithPassportEnabled": false,
+    "IsMaltaExtServiceConsentsEnabled": false,
+    "isApplicantOTPEnabled": false,
+    "isMaltaFamilyReunificationEnabled": false,
+    "isEmployerDetailsRequired": false,
+    "isMIGRISNumberEnabled": false,
+    "description": null,
+    "isEEFRegistrationEnabled": false,
+    "eefNumberRegex": null,
+    "error": null
+  },
+  {
+    "id": 8201,
+    "parentId": 8200,
+    "masterId": 0,
+    "name": "D Visa",
+    "missionCode": "prt",
+    "centerCode": "POSF",
+    "code": "VisD",
+    "culturecode": "en-US",
+    "iswaitlist": false,
+    "isTMIEnabled": false,
+    "isVLNNumberEnable": false,
+    "vlnNumberRegex": null,
+    "vlnNumberLabelFormat": null,
+    "enableReferenceNumber": false,
+    "isApplicantDocumentUploadEnabled": false,
+    "isReferenceNumberWithPassportEnabled": false,
+    "IsMaltaExtServiceConsentsEnabled": false,
+    "isApplicantOTPEnabled": false,
+    "isMaltaFamilyReunificationEnabled": false,
+    "isEmployerDetailsRequired": false,
+    "isMIGRISNumberEnabled": false,
+    "description": null,
+    "isEEFRegistrationEnabled": false,
+    "eefNumberRegex": null,
+    "error": null
+  }
+]

@@ -1,0 +1,23 @@
+POST /user/login HTTP/1.1
+Host: lift-api.vfsglobal.com
+Connection: keep-alive
+Content-Length: 878
+Pragma: no-cache
+Cache-Control: no-cache
+sec-ch-ua: "Google Chrome";v="123", "Not:A-Brand";v="8", "Chromium";v="123"
+clientSource: F9cAbp/IGRn7lSxkNM/A60GuyRbhpbBSH65uHzaxyY8/odlMb2YyZE857jFpV90T1hiGUi9wLTuxYwK3kK2z2avSERXiWr9flW6GAdDqvulLaCqJSEXv6+h0QhdvXKlVPCspyRoP3LbT3p66gXfYCs9ikPD+WWuMxHPePB0yxuk=
+sec-ch-ua-mobile: ?0
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json, text/plain, */*
+route: usa/en/prt
+sec-ch-ua-platform: "macOS"
+Origin: https://visa.vfsglobal.com
+Sec-Fetch-Site: same-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: https://visa.vfsglobal.com/
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-GB,en;q=0.9
+
+username=RICHARD85HUBERXEQ@OUTLOOK.COM&password=n5NwPypBRh4MrNQqST4tEhn8Adv9h95pNbd9HGBwFFzS82IIUHne0El95oEO1C1xQCqPNfr6OT9kPT3w+Wd3BFUhCtDooTbWR8LDTl5S0zYGQNgSP7U9c4141ix2zzhjo8gc+821b2KhUxELLTdEemF8lKSOrkb1x1LqSwdH8xA=&missioncode=prt&countrycode=usa&languageCode=en-US&captcha_version=cloudflare-v1&captcha_api_key=0.Zs6_w1zhj-StE7ATtKhVt-2y1KfrfECQa_O6epOLmydWUdzly_XktoKIu0UwrWCTKw8dxsSort3YkRWpqhAshO1sQ7pDSngpLrIRgurvZMGIEqdSzoJcvoSesjghqOPrEYfsejIIy2b-Jqf0C729ZFmPKXl3liTio2a1gzsBI5NEEgH7XFR8iTpp35Rd2HirWFC2FeUteFUKgp9DQvvTBxxuWIs-cfSp8Bp3if9JkL5jS1nU3HgLBv6yLBdYTXM7IaPKQ7kiB1XYG-_MmMq9H8xKMlf0UneZytaFsvqL2pWBaV5bdMPN5Tmn9NueZnYPQW6uAOcFnbUtu_v_YwUo1tLSeVdRYPlymrqTx0E3dVr09KnvzfrdXUZYamAcYOv63koFQ8PBdcgKJdXrYhbVo5wRnPwcojezbqNVCvdr6Oda5CT19WRwRa1dGxAJts2bLIl9DcSZYoC1SUhslWX2HQ.V4_otH_yq4_o-997NtRSeQ.9e32f9738eeefe5f9d4107ccbbe27843b15bdfb6255ef96ebb4f3909869fea93

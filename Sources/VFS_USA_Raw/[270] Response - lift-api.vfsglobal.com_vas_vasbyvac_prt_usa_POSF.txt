@@ -1,0 +1,127 @@
+HTTP/1.1 200 OK
+Date: Thu, 04 Apr 2024 12:09:28 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+x-amzn-requestid: 2b7b564f-4abd-4a45-ad43-0a8752fc787d
+access-control-allow-origin: *
+access-control-allow-headers: *
+x-amz-apigw-id: VszC3G7wrPEEsxw=
+access-control-allow-methods: GET, POST
+x-amzn-trace-id: Root=1-660e9878-11bf477d7745969a1f4472d1
+via: 1.1 765a91ad9951d0108fc1de53e348bac4.cloudfront.net (CloudFront), 1.1 48f7e6e0c69d96f4e263d50b2c4a6906.cloudfront.net (CloudFront)
+x-amz-cf-pop: FRA60-P5
+x-amz-cf-pop: MRS52-P4
+vary: Accept-Encoding
+x-cache: Miss from cloudfront
+x-amz-cf-id: OLEak9syPfjQB1DBYrAloRQyPBfRYC43fhnowIUPuOUB-Q8faVi9qA==
+CF-Cache-Status: DYNAMIC
+Set-Cookie: <redact>
+Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+X-Content-Type-Options: nosniff
+Set-Cookie: <redact>
+Server: cloudflare
+CF-RAY: 86f13090686203de-LIS
+Content-Encoding: br
+
+{
+  "data": [
+    {
+      "name": "Courier Service",
+      "code": "COU",
+      "id": 111,
+      "unitPrice": 35,
+      "taxPercent": 0,
+      "amount": 35,
+      "currency": "USD",
+      "description": "Courier Service",
+      "isAvailableOnline": true,
+      "isPackage": false,
+      "isAssociatedWithAppointment": false,
+      "isCourierIntegrationEnabled": false,
+      "isMandatory": false,
+      "relevanceRanking": 0,
+      "isUPSCourier": false,
+      "isCourierService": false,
+      "serviceType": "Normal",
+      "isTMIService": false,
+      "isODMV": false,
+      "enableVASAfterROComplete": false,
+      "includedVAS": [],
+      "complimentaryVAS": null
+    },
+    {
+      "name": "Photograph Service",
+      "code": "PHG",
+      "id": 53,
+      "unitPrice": 12,
+      "taxPercent": 0,
+      "amount": 12,
+      "currency": "USD",
+      "description": "Support your application with high-quality personal photographs.\r\nWant to ensure that your photos meet the required standards, or forgot to bring an image of your own?\r\nNot to worry.\r\nOur friendly staff are available to photograph you during your visit to the Visa Application Centre - ensuring that you have a photograph that meets the quality standards required for a visa submission. It’s quick, affordable and easy - and our staff can handle it all for you.\r\n",
+      "isAvailableOnline": true,
+      "isPackage": false,
+      "isAssociatedWithAppointment": false,
+      "isCourierIntegrationEnabled": false,
+      "isMandatory": false,
+      "relevanceRanking": 0,
+      "isUPSCourier": false,
+      "isCourierService": false,
+      "serviceType": "Normal",
+      "isTMIService": false,
+      "isODMV": false,
+      "enableVASAfterROComplete": false,
+      "includedVAS": [],
+      "complimentaryVAS": null
+    },
+    {
+      "name": "Photocopy",
+      "code": "PHC",
+      "id": 108,
+      "unitPrice": 1,
+      "taxPercent": 0,
+      "amount": 1,
+      "currency": "USD",
+      "description": "Save time and protect your valuable original documents with our Photocopying service.\r\nThe quality of your photocopied documents is extremely important to your application, and with our Photocopying service, you can be sure that your documents are ready for your visa application.\r\nWe offer fast, high-powered machines working on top-quality paper at our Visa Application Centres. It is fast,easy and affordable.",
+      "isAvailableOnline": true,
+      "isPackage": false,
+      "isAssociatedWithAppointment": false,
+      "isCourierIntegrationEnabled": false,
+      "isMandatory": false,
+      "relevanceRanking": 0,
+      "isUPSCourier": false,
+      "isCourierService": false,
+      "serviceType": "Normal",
+      "isTMIService": false,
+      "isODMV": false,
+      "enableVASAfterROComplete": false,
+      "includedVAS": [],
+      "complimentaryVAS": null
+    },
+    {
+      "name": "Email Printing",
+      "code": "PRN",
+      "id": 65,
+      "unitPrice": 1,
+      "taxPercent": 0,
+      "amount": 1,
+      "currency": "USD",
+      "description": "Email Passport Printing service",
+      "isAvailableOnline": true,
+      "isPackage": false,
+      "isAssociatedWithAppointment": false,
+      "isCourierIntegrationEnabled": false,
+      "isMandatory": false,
+      "relevanceRanking": 0,
+      "isUPSCourier": false,
+      "isCourierService": false,
+      "serviceType": "Normal",
+      "isTMIService": false,
+      "isODMV": false,
+      "enableVASAfterROComplete": false,
+      "includedVAS": [],
+      "complimentaryVAS": null
+    }
+  ],
+  "error": null
+}

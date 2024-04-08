@@ -1,0 +1,49 @@
+HTTP/1.1 200 OK
+Date: Thu, 04 Apr 2024 12:09:29 GMT
+Content-Type: application/json
+Transfer-Encoding: chunked
+Connection: keep-alive
+x-amzn-requestid: 64fb462d-ea75-4288-aa08-6748af2e43b0
+x-amz-apigw-id: VsyHaEfPrPEEMKg=
+x-amzn-trace-id: Root=1-660e96fb-19d1f09e2a0e968f5bafe4ca
+via: 1.1 c1e31c801257ebc563cbb890e887cb1e.cloudfront.net (CloudFront), 1.1 12462511bf75e25d997040c6b0156390.cloudfront.net (CloudFront)
+x-amz-cf-pop: FRA60-P5
+x-amz-cf-pop: MRS52-P4
+x-cache: Hit from cloudfront
+x-amz-cf-id: pssHo0boCZ36tWv0QHqfBrLLTHxAQd173twXpiTCqgbD5OPDrfbI_w==
+Age: 381
+x-xss-protection: 1; mode=block
+x-frame-options: DENY
+referrer-policy: strict-origin-when-cross-origin
+content-security-policy: upgrade-insecure-requests;
+x-content-type-options: nosniff
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+access-control-allow-origin: https://visa.vfsglobal.com
+vary: Origin
+CF-Cache-Status: DYNAMIC
+Set-Cookie: <redact>
+Set-Cookie: <redact>
+Server: cloudflare
+CF-RAY: 86f130997b7203ea-LIS
+Content-Encoding: br
+
+{
+  "genders": [
+    {
+      "id": 1,
+      "langaugeName": "Male",
+      "isoCode": "Male"
+    },
+    {
+      "id": 2,
+      "langaugeName": "Female",
+      "isoCode": "Female"
+    },
+    {
+      "id": 3,
+      "langaugeName": "Others / Transgender",
+      "isoCode": "Others"
+    }
+  ],
+  "error": null
+}
