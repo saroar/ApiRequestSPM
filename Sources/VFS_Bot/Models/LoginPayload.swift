@@ -10,7 +10,7 @@ struct LoginPayload: Codable {
     var captcha_api_key: String
 
     var encriptedPassword: String? {
-        guard let password = PasswordEncript.getEncryptedPasswordBase64(password: self.password)
+        guard let password = PasswordEncrypt.getEncryptedPasswordBase64(password: self.password)
         else {
             print("Isuuse is in password encript")
             return nil

@@ -9,6 +9,8 @@ struct EarliestDateSlotsResponse: Decodable {
     let earliestDate: Date?
     let earliestSlotLists: [EarliestDateSlotApplicant]
     let error: ErrorDetail?
+
+    
 }
 
 struct EarliestDateSlotApplicant: Decodable {

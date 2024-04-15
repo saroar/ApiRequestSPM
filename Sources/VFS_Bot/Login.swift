@@ -7,15 +7,9 @@ import NIOSSL
 
 // MARK: - LoginResponse
 // {'accessToken': None, 'isAuthenticated': False, 'nearestVACCountryCode': None, 'FailedAttemptCount': 1, 'isAppointmentBooked': False, 'isLastTransactionPending': False, 'isAppointmentExpired': False, 'isLimitedDashboard': False, 'isROCompleted': False, 'isSOCompleted': False, 'roleName': None, 'isUkraineScheme': False, 'isUkraineSchemeDocumentUpload': False, 'loginUser': None, 'dialCode': None, 'contactNumber': None, 'remainingCount': 2, 'accountLockHours': 2, 'enableOTPAuthentication': False, 'isNewUser': False, 'taResetPWDToken': None, 'firstName': None, 'lastName': None, 'dateOfBirth': None, 'isPasswordExpiryMessage': False, 'PasswordExpirydays': 0, 'error': {'code': 410, 'description': 'Invalid Logins'}}
-struct LoginResponse: Codable {
+struct LoginResponse: Decodable {
 
-    // MARK: - Error
-    struct Error: Codable {
-        let code: Int
-        let description: String
-    }
-
-    let accessToken: String
+    let accessToken: String?
     let isAuthenticated: Bool
     let nearestVACCountryCode: String?
     let failedAttemptCount: Int
@@ -29,7 +23,7 @@ struct LoginResponse: Codable {
     let taResetPWDToken, firstName, lastName, dateOfBirth: String?
     let isPasswordExpiryMessage: Bool
     let passwordExpirydays: Int
-    let error: Error?
+    let error: ErrorDetail?
 
     enum CodingKeys: String, CodingKey {
         case accessToken, isAuthenticated, nearestVACCountryCode
@@ -39,7 +33,6 @@ struct LoginResponse: Codable {
         case error
     }
 
-    
 }
 
 
@@ -135,7 +128,7 @@ struct Login {
             request.headers.add(name: "route", value: "\(countryCode)/en/\(missionCode)")
             request.headers.replaceOrAdd(name: "Content-Type", value: "application/x-www-form-urlencoded")
 
-            guard let password = PasswordEncript.getEncryptedPasswordBase64(password: vfs_password)
+            guard let password = PasswordEncrypt.getEncryptedPasswordBase64(password: vfs_password)
             else {
                 print("Isuuse is in password encript")
                 try await httpClient.shutdown()
@@ -212,7 +205,7 @@ struct Login {
                 // Print the elapsed time
                 print("Elapsed time: \(elapsedTime) seconds")
             } else {
-                print("Response error: \(response)")
+                print("\(#function) Response error: \(response)")
             }
 
         } catch {

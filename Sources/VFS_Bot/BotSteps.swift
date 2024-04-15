@@ -4,21 +4,28 @@ import NIOHTTP1
 import AsyncHTTPClient
 import Logging
 
-let logger = Logger(label: "com.quickprocess.main")
+
+var logger = Logger(label: "com.quickprocess.main")
+
 
 struct BotSteps {
+
+    enum BSError: Error {
+        case shutdown, oneOfVarIsEmpty, decodeError, outOfTheRange
+    }
 
     var proxy: String
     var language_code = "en-US"
 
-    let user_login_dto: UserLoginDTO
+    let user_login_dto: UserAccountDTO
     var client_application_dto: ClientApplicationDTO
     var applicantPlayload: ApplicantPayload
+    var loginPayload: LoginPayload
 
     init(
         proxy: String,
         language_code: String = "en-US",
-        user_login_dto: UserLoginDTO,
+        user_login_dto: UserAccountDTO,
         client_application_dto: ClientApplicationDTO,
         networkService: NetworkService
     ) {
@@ -38,13 +45,23 @@ struct BotSteps {
             contactNumber: self.client_application_dto.contactNumber,
             dialCode: "\(self.client_application_dto.dialCode)",
             passportNumber: self.client_application_dto.passportNumber,
-            passportExpirtyDate: self.client_application_dto.passportExpiryDate.toFormattedString(),
+            passportExpirtyDate: self.client_application_dto.passportExpirtyDate.toFormattedString(),
             dateOfBirth: self.client_application_dto.dateOfBirth.toFormattedString(),
             emailId: self.user_login_dto.emailText,
             nationalityCode: self.client_application_dto.nationalityCode,
             addressline1: " 3726 Woodridge Lane, Memphis, Tennessee",
             ipAddress: ""
         )
+
+        self.loginPayload = LoginPayload(
+            username: self.user_login_dto.emailText,
+            password: self.user_login_dto.vfsPassword,
+            missioncode: self.client_application_dto.missionCode,
+            countrycode: self.client_application_dto.countryCode,
+            captcha_api_key: ""
+        )
+
+        logger.logLevel = .debug
     }
 
     var route: String {
@@ -66,17 +83,6 @@ struct BotSteps {
         )
     }
 
-    // MARK: All Response
-    var loginResponse: LoginResponse? = nil
-    var ipResponse: IPResponse? = nil
-    var applicantResponse: ApplicantResponse? = nil
-    var earliestDateSlotsResponse: EarliestDateSlotsResponse? = nil
-    var feesResponse: FeesResponse? = nil
-    var calendarResponse: CalendarResponse? = nil
-    var timeslotsResponse: TimeslotsResponse? = nil
-    var scheduleAppointmentResponse: ScheduleAppointmentResponse? = nil
-
-
     var access_token: String {
         self.loginResponse?.accessToken ?? ""
     }
@@ -93,7 +99,10 @@ struct BotSteps {
             return nil
         }
 
-        return earliestDate.calculateStartDate()
+        let earliestDateCalculateStartDate = earliestDate.calculateStartDate()
+
+        logger.info("earliestDate: \(earliestDate), fromDate: \(earliestDateCalculateStartDate)")
+        return earliestDateCalculateStartDate
     }
 
     var urn: String? {
@@ -109,6 +118,16 @@ struct BotSteps {
 
     private var networkService: NetworkService
 
+    // MARK: All Response
+    var loginResponse: LoginResponse? = nil
+    var ipResponse: IPResponse? = nil
+    var applicantResponse: ApplicantResponse? = nil
+    var earliestDateSlotsResponse: EarliestDateSlotsResponse? = nil
+    var feesResponse: FeesResponse? = nil
+    var calendarResponse: CalendarResponse? = nil
+    var timeslotsResponse: TimeslotsResponse? = nil
+    var scheduleAppointmentResponse: ScheduleAppointmentResponse? = nil
+
     func appointmentFullDetails(scriptTime: String) -> String {
 
         guard let center = self.timeslotsResponse?.center,
@@ -116,9 +135,13 @@ struct BotSteps {
               let full_time_details = self.scheduleAppointmentResponse?.full_time_details,
               let requestRefNo = self.scheduleAppointmentResponse?.requestRefNo
 
-        else { return "" }
+        else {
+            logger.error("\(#function) some of data is missing")
+            return ""
+        }
 
         let appointmentFullDetails = """
+            \n
             FirstName: \(self.client_application_dto.firstName)
             Lastname: \(self.client_application_dto.lastName)
             Visa Category Code: \(self.client_application_dto.visaCategoryCode)
@@ -149,141 +172,42 @@ struct BotSteps {
         return currentTime
     }
 
-    mutating func getProxyIp() async throws -> String? {
-
-        guard let proxyData = ProxyData(from: self.proxy)
-        else {
-            logger.info("Failed to create ProxyData from URL.")
-            return nil
-        }
-
-        var tlsConfiguration = TLSConfiguration.makeClientConfiguration()
-        tlsConfiguration.certificateVerification = .none
-
-        let configuration = HTTPClient.Configuration(
-            tlsConfiguration: tlsConfiguration,
-            proxy: .server(
-                host: proxyData.host,
-                port: proxyData.port,
-                authorization: .basic(
-                    username: proxyData.username,
-                    password: proxyData.password
-                )
-            )
-        )
-
-        // Initialize HTTP client with proxy configuration
-        let httpClient = HTTPClient(eventLoopGroupProvider: .singleton, configuration: configuration)
-
+    func getProxyIp() async throws -> IPResponse {
         do {
-            var request = HTTPClientRequest(url: "http://httpbin.org/ip")
-            request.method = .GET
-
-            let response = try await httpClient.execute(request, timeout: .seconds(30))
-            if response.status == .ok{
-                let bodyData = try await response.body.collect(upTo: 1024 * 1024)
-                let data = Data(buffer: bodyData)
-
-                let ipRes = try JSONDecoder().decode(IPResponse.self, from: data)
-                self.ipResponse = ipRes
-                dump(ipRes)
-
-                try await httpClient.shutdown()
-                return ipRes.origin
-            } else {
-                // Handle non-OK response
-                logger.info("Received non-OK status: \(response.status)")
-            }
-
+            let ipRes: IPResponse = try await self.networkService.getIPRequest(from: APIEndpoint.getIP.rawValue)
+            return ipRes
         } catch {
-            // handle error
-            logger.info("Error: \(error)")
-        }
+            logger.error("\(#function) An error occurred: \(error)")
 
-        try await httpClient.shutdown()
-        return nil
+//            self.applicantPlayload.ipAddress = "98.167.101.137"
+            return IPResponse(origin: "98.167.101.137")
+        }
     }
 
-    mutating func loginRequest() async throws {
 
-        logger.info("\(#function) Start---")
-
-        let missionCode = self.user_login_dto.missionCode
-        let countryCode = self.user_login_dto.countryCode
-        let route = "\(countryCode)/en/\(missionCode)"
-
-        var loginPayload = LoginPayload(
-            username: self.user_login_dto.emailText,
-            password: self.user_login_dto.vfsPassword,
-            missioncode: missionCode,
-            countrycode: countryCode,
-            captcha_api_key: ""
-        )
-
-        let solution_token = try await self.cf_solution.heroAndreykaSolveCaptcha()
-
-        guard
-            let token = solution_token?.token
-        else {
-            logger.info("Token is empty")
-            try await networkService.shutdown()
-            return
-        }
+    func loginRequest() async throws -> LoginResponse? {
+        logger.info("\(#function.capitalized) Start...")
 
         // Start measuring time
         let startTime = Date()
 
-        loginPayload.captcha_api_key = token
-
         let additionalHeaders = [
             (HTTPHeaderField.route, route),
             (HTTPHeaderField.contentType, "application/x-www-form-urlencoded"),
+            (HTTPHeaderField.acceptEncoding, "gzip, deflate")
         ]
 
-        let response = try await networkService.postWithBodyStringRequest(
+        let response: LoginResponse = try await networkService.postWithBodyStringRequest(
             to: .userLogin,
             payload: loginPayload,
             additionalHeaders: additionalHeaders
         )
 
-        if response.status == .ok {
-            // handle response
-
-            let bodyData = try await response.body.collect(upTo: 4096 * 4096)
-            // Convert ByteBuffer to Data
-            let data = Data(buffer: bodyData)
-
-            if let jsonString = String(data: data, encoding: .utf8) {
-                logger.info("Raw JSON string: \(jsonString)")
-            }
-
-            do { // will it memory link
-                let loginResponse = try JSONDecoder().decode(LoginResponse.self, from: data)
-                dump(loginResponse)
-                self.loginResponse = loginResponse
-            } catch {
-                logger.info("\(#line) Login Decode error: \(error)")
-            }
-
-            // Calculate the elapsed time
-            let elapsedTime = Date().timeIntervalSince(startTime)
-
-            // run backgroundmode get ip without block main thread
-            // try await getProxyIp()
-
-            // Print the elapsed time
-            logger.info("- /user/login Elapsed time: \(elapsedTime) seconds")
-
-        } else {
-            let elapsedTime = Date().timeIntervalSince(startTime)
-            logger.info("Elapsed time: \(elapsedTime) seconds")
-            logger.info("Response error: \(response)")
-            try await networkService.shutdown()
-        }
+        return response
     }
 
-    mutating func applicationRequest() async throws {
-        logger.info("\(#function) Start---")
+    func applicationRequest() async throws -> ApplicationDataResponse {
+        logger.info("\(#function.capitalized) Start...")
 
         // Start measuring time
         let startTime = Date()
@@ -294,40 +218,21 @@ struct BotSteps {
             (HTTPHeaderField.contentType, "application/json;charset=UTF-8"),
         ]
 
-        let response = try await networkService.postWithJSONBodyRequest(
+        let response: ApplicationDataResponse = try await networkService.postWithJSONBodyRequest(
             to: .appointmentApplication,
             payload: applicationPayload,
             additionalHeaders: additionalHeaders
         )
 
-        if response.status == .ok {
-            // handle response
+        let elapsedTime = Date().timeIntervalSince(startTime)
+        logger.debug("Applicants Rtime: \(elapsedTime) sec")
 
-            let bodyData = try await response.body.collect(upTo: 4096 * 4096)
-            // Convert ByteBuffer to Data
-            let data = Data(buffer: bodyData)
+        return response
 
-            if let jsonString = String(data: data, encoding: .utf8) {
-                logger.info("Raw JSON string: \(jsonString)")
-            }
-
-            logger.info("Application sucess")
-
-            // Calculate the elapsed time
-            let elapsedTime = Date().timeIntervalSince(startTime)
-
-            // Print the elapsed time
-            logger.info("- /user/application Elapsed time: \(elapsedTime) seconds")
-        } else {
-            let elapsedTime = Date().timeIntervalSince(startTime)
-            logger.info("Application Elapsed time: \(elapsedTime) seconds")
-            logger.info("Response error: \(response)")
-            try await networkService.shutdown()
-        }
     }
 
-    mutating func checkSlotAvailableRequest() async throws {
-        logger.info("\(#function) Start---")
+    private func checkSlotAvailableRequest() async throws -> EarliestDateSlotsResponse? {
+        logger.info("\(#function.capitalized) Start...")
 
         let check_slot_available_payload = CheckSlotAvailablePayload(
             loginUser: self.user_login_dto.emailText,
@@ -347,61 +252,56 @@ struct BotSteps {
             (HTTPHeaderField.secGpc, HTTPHeaderField.secGpc.value)
         ]
 
-        let response = try await networkService.postWithJSONBodyRequest(
+        let response: EarliestDateSlotsResponse = try await networkService.postWithJSONBodyRequest(
             to: .checkSlotAvailability,
             payload: check_slot_available_payload,
             additionalHeaders: additionalHeaders
         )
 
-        if response.status == .ok {
-            // handle response
+        // Custom date formatter
+//        let dateFormatter = DateFormatter.sharedDateMDYHMSFormatter
+//        let decoder = JSONDecoder()
+//        decoder.dateDecodingStrategy = .formatted(dateFormatter)
 
-            let bodyData = try await response.body.collect(upTo: 4096 * 4096)
-            // Convert ByteBuffer to Data
-            let data = Data(buffer: bodyData)
+        let elapsedTime = Date().timeIntervalSince(startTime)
+        logger.debug("CheckSlots Rtime: \(elapsedTime) sec")
+        return response
 
-            if let jsonString = String(data: data, encoding: .utf8) {
-                logger.info("Raw JSON string: \(jsonString)")
-            }
-
-            // Custom date formatter
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MM/dd/yyyy HH:mm:ss"
-            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0) // Adjust this as necessary
-
-
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .formatted(dateFormatter)
-
-            do {
-                let response = try decoder.decode(EarliestDateSlotsResponse.self, from: data)
-                self.earliestDateSlotsResponse = response
-                logger.info("Response with earliestDate: \(dump(response))")
-                logger.info("EarliestDate to formDate: \(self.fromDate as Any)")
-            } catch {
-                logger.info("Decode error: \(error)")
-            }
-
-            // Calculate the elapsed time
-            let elapsedTime = Date().timeIntervalSince(startTime)
-
-            // Print the elapsed time
-            logger.info("- /appointment/CheckIsSlotAvailable Elapsed time: \(elapsedTime) seconds")
-        } else {
-            let elapsedTime = Date().timeIntervalSince(startTime)
-            logger.info("CheckIsSlotAvailable Elapsed time: \(elapsedTime) seconds")
-            logger.info("Response error: \(response)")
-            try await networkService.shutdown()
-        }
     }
 
-    mutating func applicantRequest() async throws {
-        logger.info("\(#function) Start---")
+    func checkSlotsAvilableWithLoop() async throws -> EarliestDateSlotsResponse? {
+        let response = try await self.checkSlotAvailableRequest()
+        var count = 0
+
+        while self.earliestDateSlotsResponse?.earliestDate == nil {
+            let seconds = 2
+            try await Task.sleep(nanoseconds: 500_00)
+            _ = try await self.checkSlotAvailableRequest()
+            count += 1
+            logger.info("Retry in \(seconds) count: \(count)")
+        }
+
+        return response
+
+    }
+
+    func applicantRequest() async throws -> ApplicantResponse? {
+        logger.info("\(#function.capitalized) Start...")
+
+        guard
+            let earliestDate = self.earliestDateSlotsResponse?.earliestDate
+        else {
+            throw BSError.oneOfVarIsEmpty
+        }
+
+
+//        if earliestDate > self.client_application_dto.toDate {
+//            logger.warning("Out of the range earliestDate: \(earliestDate) todate: \(self.client_application_dto.toDate)")
+//            throw BSError.outOfTheRange
+//        }
 
         // Start measuring time
         let startTime = Date()
-
-        applicantPlayload.ipAddress = self.ip_address
 
         let applicantJson = ApplicantListPayload(
             countryCode: self.user_login_dto.countryCode,
@@ -421,44 +321,21 @@ struct BotSteps {
             (HTTPHeaderField.contentType, "application/json;charset=UTF-8")
         ]
 
-        let response = try await networkService.postWithJSONBodyRequest(
+        let response: ApplicantResponse = try await networkService.postWithJSONBodyRequest(
             to: .appointmentApplicants,
             payload: applicantJson,
             additionalHeaders: additionalHeaders
         )
 
-        if response.status == .ok {
-            // {"data":null,"error":{"code":1041,"description":"No Applicant exists"}}
-            // handle response
-
-            let bodyData = try await response.body.collect(upTo: 4096 * 4096)
-            // Convert ByteBuffer to Data
-            let data = Data(buffer: bodyData)
-
-            //            if let jsonString = String(data: data, encoding: .utf8) {
-            //                logger.info("Raw JSON string: \(jsonString)")
-            //            }
-
-            do {
-                let response = try JSONDecoder().decode(ApplicantResponse.self, from: data)
-                self.applicantResponse = response
-                logger.info("Response with applicant: \(dump(response))")
-            } catch {
-                logger.info("Decode errors:  \(error)")
-            }
-
-
-        } else {
-            logger.info("Response error: \(response)")
-            try await networkService.shutdown()
-        }
-
         let elapsedTime = Date().timeIntervalSince(startTime)
-        logger.info("Applicants Request Elapsed time: \(elapsedTime) seconds")
+        logger.debug("Applicants Rtime: \(elapsedTime) sec")
+
+        return response
+
     }
 
-    mutating func feesRequest() async throws {
-        logger.info("\(#function) Start---")
+    func feesRequest() async throws -> FeesResponse? {
+        logger.info("\(#function.capitalized) Start...")
 
         // Start measuring time
         let startTime = Date()
@@ -467,7 +344,7 @@ struct BotSteps {
             let applicantResponse = self.applicantResponse,
             let urn = applicantResponse.urn else {
             logger.info("feesRequest missing urn or applicantResponse")
-            return
+            throw BSError.oneOfVarIsEmpty
         }
 
         let feesJson = FeesPayload(
@@ -484,43 +361,19 @@ struct BotSteps {
             (HTTPHeaderField.contentType, "application/json;charset=UTF-8")
         ]
 
-        let response = try await networkService.postWithJSONBodyRequest(
+        let response: FeesResponse = try await networkService.postWithJSONBodyRequest(
             to: .appointmentFees,
             payload: feesJson,
             additionalHeaders: additionalHeaders
         )
 
-        if response.status == .ok {
-
-            let bodyData = try await response.body.collect(upTo: 4096 * 4096)
-            // Convert ByteBuffer to Data
-            let data = Data(buffer: bodyData)
-
-
-            if let jsonString = String(data: data, encoding: .utf8) {
-                logger.info("Raw JSON string: \(jsonString)")
-            }
-
-            do {
-                let response = try JSONDecoder().decode(FeesResponse.self, from: data)
-                logger.info("Response with Fees:  \(dump(response))")
-                self.feesResponse = response
-            } catch {
-                logger.info("Decode error: \(error)")
-            }
-
-        } else {
-            logger.info("Response error: \(response)")
-            try await networkService.shutdown()
-        }
-
-
         let elapsedTime = Date().timeIntervalSince(startTime)
-        logger.info("Fees Request Elapsed time: \(elapsedTime) seconds")
+        logger.debug("Fees Rtime: \(elapsedTime) sec")
+        return response
     }
 
-    mutating func calendarRequest() async throws {
-        logger.info("\(#function) Start---")
+    func calendarRequest() async throws -> CalendarResponse? {
+        logger.info("\(#function.capitalized) Start...")
 
         // Start measuring time
         let startTime = Date()
@@ -528,8 +381,8 @@ struct BotSteps {
         guard
             let fromDate = self.fromDate,
             let urn = self.urn else {
-            logger.info("Form Date missing cant make calendar requst")
-            return
+            logger.error("Form Date missing cant make calendar requst")
+            throw BSError.oneOfVarIsEmpty
         }
 
         let calendarJson = CalendarPayload(
@@ -542,53 +395,36 @@ struct BotSteps {
             urn: urn
         )
 
-        logger.info("\(calendarJson.toJSONString())")
+        //logger.info("\(calendarJson.toJSONString())")
 
         let additionalHeaders = [
             (HTTPHeaderField.route, route),
             (HTTPHeaderField.authorize, self.access_token),
-            (HTTPHeaderField.contentType, "application/json;charset=UTF-8")
+            (HTTPHeaderField.contentType, "application/json;charset=UTF-8"),
+            (HTTPHeaderField.acceptEncoding, "identity")
         ]
 
-        let response = try await networkService.postWithJSONBodyRequest(
+        let response: CalendarResponse = try await networkService.postWithJSONBodyRequest(
             to: .appointmentCalendar,
             payload: calendarJson,
             additionalHeaders: additionalHeaders
         )
 
-        if response.status == .ok {
+//        let response = try JSONDecoder
+//            .wiht(dateFormatter: .sharedDateMDYFormatter)
+//            .decode(CalendarResponse.self, from: data)
 
-            let bodyData = try await response.body.collect(upTo: 4096 * 4096)
-            // Convert ByteBuffer to Data
-            let data = Data(buffer: bodyData)
-
-            // Custom date formatter
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MM/dd/yyyy"
-
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .formatted(dateFormatter)
-
-            do {
-                let response = try decoder.decode(CalendarResponse.self, from: data)
-                logger.info("Response with Calendar:  \(dump(response))")
-                self.calendarResponse = response
-            } catch {
-                logger.info("Decode error: \(error)")
-            }
-
-        } else {
-            logger.info("Response error: \(response)")
-            try await networkService.shutdown()
-        }
-
+//        logger.info("Response with Calendar:  \(dump(response))")
 
         let elapsedTime = Date().timeIntervalSince(startTime)
-        logger.info("Calendar Request Elapsed time: \(elapsedTime) seconds")
+        logger.debug("Calendar Rtime: \(elapsedTime) sec")
+
+        return response
+
     }
 
-    mutating func timeSlotsRequest() async throws {
-        logger.info("\(#function) Start---")
+    func timeSlotsRequest() async throws -> TimeslotsResponse? {
+        logger.info("\(#function.capitalized) Start...")
 
         // Start measuring time
         let startTime = Date()
@@ -598,9 +434,15 @@ struct BotSteps {
             let urn = self.urn,
             let slotDate = calendarResponse.calendars?.last?.date.toFormattedString()
         else {
-            logger.info("\(#function) Urn/SlotDate missing cant get from calendar requst")
-            logger.info("self.calendarResponse: \(self.calendarResponse), urn: \(self.urn), slotDate: \(calendarResponse?.calendars?.last?.date.toFormattedString())")
-            return
+            let error =
+                """
+                self.calendarResponse: \(self.calendarResponse.debugDescription),
+                urn: \(self.urn ?? ""),
+                slotDate: \(calendarResponse?.calendars?.last?.date.toFormattedString() ?? "")
+                """
+
+            logger.error("\(error)")
+            throw BSError.oneOfVarIsEmpty
         }
 
 
@@ -614,7 +456,7 @@ struct BotSteps {
             urn: urn
         )
 
-        logger.info("\(timeslotJson.toJSONString())")
+        //logger.info("\(timeslotJson.toJSONString())")
 
         let additionalHeaders = [
             (HTTPHeaderField.route, route),
@@ -622,45 +464,20 @@ struct BotSteps {
             (HTTPHeaderField.contentType, "application/json;charset=UTF-8")
         ]
 
-        let response = try await networkService.postWithJSONBodyRequest(
+        let response: TimeslotsResponse = try await networkService.postWithJSONBodyRequest(
             to: .appointmentTimeSlot,
             payload: timeslotJson,
             additionalHeaders: additionalHeaders
         )
 
-        if response.status == .ok {
-
-            let bodyData = try await response.body.collect(upTo: 4096 * 4096)
-            // Convert ByteBuffer to Data
-            let data = Data(buffer: bodyData)
-
-            // Custom date formatter
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MM/dd/yyyy"
-
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .formatted(dateFormatter)
-
-            do {
-                let response = try decoder.decode(TimeslotsResponse.self, from: data)
-                logger.info("Response with Calendar: \(dump(response))")
-                self.timeslotsResponse = response
-            } catch {
-                logger.info("Decode error: \(error)")
-            }
-
-        } else {
-            logger.info("Response error: \(response)")
-            try await networkService.shutdown()
-        }
-
-
         let elapsedTime = Date().timeIntervalSince(startTime)
-        logger.info("TimeSlots Request Elapsed time: \(elapsedTime) seconds")
+        logger.debug("TimeSlots Rtime: \(elapsedTime) sec")
+
+        return response
     }
 
-    mutating func scheduleRequest() async throws {
-        logger.info("\(#function) Start---")
+    func scheduleRequest() async throws -> ScheduleAppointmentResponse? {
+        logger.info("\(#function.capitalized) Start...")
 
         // Start measuring time
         let startTime = Date()
@@ -671,9 +488,14 @@ struct BotSteps {
             let allocationId = timeslotsResponse.slots.last?.allocationId,
             let feesResponse = self.feesResponse
         else {
-            logger.info("\(#function) Urn/SlotDate missing cant get from calendar requst")
-            logger.info("\(#function) TimeslotsResponse: \(self.timeslotsResponse) urn: \(self.urn) feesResponse: \(self.feesResponse)")
-            return
+            let error = """
+                \(#function)
+                TSR \(self.timeslotsResponse.debugDescription)
+                urn: \(self.urn ?? "")
+                feesR: \(self.feesResponse.debugDescription)
+                """
+            logger.warning("\(error)")
+            throw BSError.oneOfVarIsEmpty
         }
 
         let feeDetailsFirst = feesResponse.feeDetails?.first
@@ -696,7 +518,7 @@ struct BotSteps {
             CanVFSReachoutToApplicant: true
         )
 
-//        logger.info(schedulePayload.toJSONString())
+        //        logger.info(schedulePayload.toJSONString())
 
         let additionalHeaders = [
             (HTTPHeaderField.route, route),
@@ -704,64 +526,55 @@ struct BotSteps {
             (HTTPHeaderField.contentType, "application/json;charset=UTF-8")
         ]
 
-        let response = try await networkService.postWithJSONBodyRequest(
+        let response: ScheduleAppointmentResponse = try await networkService.postWithJSONBodyRequest(
             to: .appointmentSchedule,
             payload: schedulePayload,
             additionalHeaders: additionalHeaders
         )
 
-        if response.status == .ok {
+//        let response = try JSONDecoder
+//            .wiht(dateFormatter: .sharedDateMDYFormatter)
+//            .decode(ScheduleAppointmentResponse.self, from: data)
 
-            let bodyData = try await response.body.collect(upTo: 4096 * 4096)
-            // Convert ByteBuffer to Data
-            let data = Data(buffer: bodyData)
+        return response
 
-            // Custom date formatter
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "MM/dd/yyyy"
-            dateFormatter.timeZone = TimeZone(secondsFromGMT: 0) // Adjust this as necessary
+    }
 
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .formatted(dateFormatter)
-
-
-            if let jsonString = String(data: data, encoding: .utf8) {
-                logger.info("Raw JSON string: \(jsonString)")
-            }
-
-            do {
-                let response = try decoder.decode(ScheduleAppointmentResponse.self, from: data)
-                logger.info("Response with Schedule: \(dump(response))")
-                self.scheduleAppointmentResponse = response
-            } catch {
-                logger.info("Decode error: \(error)")
-            }
-
-        } else {
-            logger.info("Response error: \(response)")
+    func shutdown() async {
+        do {
             try await networkService.shutdown()
+        } catch {
+            logger.error("\(#line) \(#function) shutdown issue: \(error)")
         }
-
-
-        let elapsedTime = Date().timeIntervalSince(startTime)
-        logger.info("\(#function) Request Elapsed time: \(elapsedTime) seconds")
     }
 }
 
-public func setupAndStart() async throws {
+func setupAndStart() async throws -> Void {
 
+        let countryCode = "usa"
+        let missionCode = "prt"
+        let vacCode = "VACH"
+        let visaCategoryCode = "LS"
+
+    // With Payment
 //    let countryCode = "usa"
 //    let missionCode = "prt"
-//    let vacCode = "PONY"
-//    let visaCategoryCode = "PNV"
+//    let vacCode = "POSF"
+//    let visaCategoryCode = "NVD"
 
-// With Payment
-    let countryCode = "usa"
-    let missionCode = "prt"
-    let vacCode = "POSF"
-    let visaCategoryCode = "NVD"
-
-    let proxyUrl = "http://customer-ind_prt-cc-pt-sessid-0986559363-sesstime-30:Xizwytbogdoh4sycpy@pr.oxylabs.io:7777"
+    let proxies: [String] = [
+        "http://customer-alif_ind_pol-cc-us-sessid-0380302391-sesstime-3:nebsygqivxahkapmU7@pr.oxylabs.io:7777",
+        "http://customer-alif_ind_pol-cc-us-sessid-0380302392-sesstime-3:nebsygqivxahkapmU7@pr.oxylabs.io:7777",
+        "http://customer-alif_ind_pol-cc-us-sessid-0380302393-sesstime-3:nebsygqivxahkapmU7@pr.oxylabs.io:7777",
+        "http://customer-alif_ind_pol-cc-us-sessid-0380302394-sesstime-3:nebsygqivxahkapmU7@pr.oxylabs.io:7777",
+        "http://customer-alif_ind_pol-cc-us-sessid-0380302395-sesstime-3:nebsygqivxahkapmU7@pr.oxylabs.io:7777",
+        "http://customer-alif_ind_pol-cc-us-sessid-0380302396-sesstime-3:nebsygqivxahkapmU7@pr.oxylabs.io:7777",
+        "http://customer-alif_ind_pol-cc-us-sessid-0380302397-sesstime-3:nebsygqivxahkapmU7@pr.oxylabs.io:7777",
+        "http://customer-alif_ind_pol-cc-us-sessid-0380302398-sesstime-3:nebsygqivxahkapmU7@pr.oxylabs.io:7777",
+        "http://customer-alif_ind_pol-cc-us-sessid-0380302399-sesstime-3:nebsygqivxahkapmU7@pr.oxylabs.io:7777",
+    ]
+    let randomNumber = Int.random(in: 0...8)
+    let proxyUrl = proxies[randomNumber]
     guard let proxyData = ProxyData(from: proxyUrl)
     else {
         logger.info("Failed to create ProxyData from URL.")
@@ -791,6 +604,7 @@ public func setupAndStart() async throws {
     )
 
     configuration.httpVersion = .http1Only
+    configuration.decompression = .enabled(limit: .ratio(100))
 
     let httpClient = HTTPClient(
         eventLoopGroupProvider: .singleton,
@@ -799,56 +613,80 @@ public func setupAndStart() async throws {
 
     let networkService = NetworkService(httpClient: httpClient)
 
-    let emailText = "stephen46hickmanvum@outlook.com"
-    let vfsPassword = "V2n#e6hH"
+    let emailText = "james98brown72c@outlook.com"
+    let vfsPassword = "kN5fL*6$"
+    let mailPassword = "balbalbalbal"
+
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "yy-MM-dd" //"dd-MM-yy"
+
+    // Create a string representing the date
+    let fromDateString = "01-07-24"
+    let toDateString = "20-07-24"
+
+    // Convert the string to a Date object
+    let fromDate = dateFormatter.date(from: fromDateString)!
+    let toDate = dateFormatter.date(from: toDateString)!
+
 
     var botSteps = BotSteps(
         proxy: proxyUrl,
-        user_login_dto: .init(
-            emailText: emailText,
-            vfsPassword: vfsPassword,
-            countryCode: countryCode,
-            missionCode: missionCode
+        user_login_dto: .init(id: 0, userMobileNumber: .init(id: 0, dialCode: 33, mobileNumber: "124342131", type: .mobile, token: "", description: "", createdAt: ""), emailText: emailText, vfsPassword: vfsPassword, mailPassword: mailPassword, countryCode: countryCode, missionCode: missionCode, isReg: true, isActive: true),
+        client_application_dto: .init(
+            id: 0, user: .init(id: 01, username: "Demo", email: "demo@gmail.com"),
+            countryCode: countryCode, visaCategoryCode: visaCategoryCode, missionCode: missionCode, centerCode: vacCode, isActive: true, isProcessing: false, isApplicationCompleted: false, firstName: "Ali", lastName: "Khana", gender: 0, nationalityCode: "ALB", dialCode: "880", contactNumber: "321234123", addressline1: "", passportNumber: "SS332123", passportExpirtyDate: Date().addingYears(6)!, dateOfBirth: Date().addingYears(-27)!, fromDate: fromDate, toDate: toDate, value: 0, emailId: "khan@gmail.com", ipAddress: "", urn: "", arn: "", loginUser: "", isPaid: false, missionDetailId: "", referenceNumber: "", middleName: "", groupName: "", note: "", errorDescription: "", bookingDate: nil,
+
+            createdAt: .now, updatedAt: .now, deleted_at: nil
         ),
-        client_application_dto: .init(id: 0, userid: 0, countryCode: countryCode, visaCategoryCode: visaCategoryCode, missionCode: missionCode, centerCode: vacCode, isActive: true, isProcessing: false, isApplicationCompleted: false, firstName: "Alex", lastName: "Polashi", gender: 0, nationalityCode: "ALB", dialCode: 880, contactNumber: "018912232342", addressline1: "", passportNumber: "AB0981276", passportExpiryDate: Date().addingYears(3)!, dateOfBirth: Date().addingYears(-26)!, fromDate: .now, toDate: .now, value: 0, emailId: "alibaba@gmail.com", createdAt: .now, updatedAt: .now, ipAddress: "", urn: "", arn: "", loginUser: "", isPaid: false, missionDetailId: "", deletedAt: nil, referenceNumber: "", middleName: "", groupName: "", note: "", errorDescription: "", bookingDate: nil),
         networkService: networkService
     )
 
-//    botSteps.client_application_dto.loginUser = botSteps.user_login_dto.emailText
-//    botSteps.client_application_dto.emailId = botSteps.user_login_dto.emailText
-
-//    botSteps.access_token = "EAAAAH72EcSh9gawjbcJG3X+L/HAlfdjreJynWhTXkhx7VmxnEY87hh8EulhVBIjexq0Tq+/IZO2ar/Yw96znbtL+WWntxH39RgrVBKWD0WRwy58ahNKXm4c2eFjED5g6GyW53W7K0HImR4bdPoE1bunFV+5vGotOTDq2aDbwc8SeJL/pp00VgN0e42BaHVBRmrnIraW5bgF1Rw6aLO9RSr2FArtlZ0iHLJeC4tAAdUFdfoc+eekI2uhv4F9TrBPRAjWuWRe90nFPUhHimydY8vvw5xojK65FFWkC1+0Uz4VIIGvL2O2Q/VFq0GDoZNQZvaAMZtE3QxJOQ9QDRj2niGLi3I5h2Bo7JmWpueW5yt+Nt8qw8nB1lOTTmyfD1VwwwNfInPfTyHoEoe4i4CSmUEmGrK10dKcxMOO6uSfM5MzCDN+bSY1U91uVsui3vQbGH/vzWT+61SYTipiDFpE0Xy6X/RxBs5jpigbEyD/GEVZ/LCqfyjgCZDlPoQ/Aonp25k6Oi62dJLpuuYVvojSun4+yfoWiBhy/Uk5UkdyyLGasGpFguG7ksSEb1fQYwlp2TPP2Q=="
-
-    // Start measuring time
-    let startTime = Date()
-
     do {
 
-        try await botSteps.loginRequest()
+        botSteps.ipResponse = try await botSteps.getProxyIp()
+        botSteps.applicantPlayload.ipAddress = botSteps.ip_address
+
+        let solution_token = try await botSteps.cf_solution.heroAndreykaSolveCaptcha()
+
+        guard
+            let token = solution_token?.token
+        else {
+            logger.error("Fetch Token is failed")
+            return
+        }
+
+        botSteps.loginPayload.captcha_api_key = token
+
+        // Start measuring time
+        let startTime = Date()
+
+        botSteps.loginResponse = try await botSteps.loginRequest()
 
         if botSteps.access_token != "" {
-            botSteps.applicantPlayload.ipAddress = try await botSteps.getProxyIp() ?? ""
-            try await botSteps.applicationRequest()
-            try await botSteps.checkSlotAvailableRequest()
-            try await botSteps.applicantRequest()
-            try await botSteps.feesRequest()
-            try await botSteps.calendarRequest()
-            try await botSteps.timeSlotsRequest()
-            try await botSteps.scheduleRequest()
+            _ = try await botSteps.applicationRequest()
+            botSteps.earliestDateSlotsResponse = try await botSteps.checkSlotsAvilableWithLoop()
+            botSteps.applicantResponse = try await botSteps.applicantRequest()
+            botSteps.feesResponse = try await botSteps.feesRequest()
+            botSteps.calendarResponse = try await botSteps.calendarRequest()
+            botSteps.timeslotsResponse = try await botSteps.timeSlotsRequest()
+            botSteps.scheduleAppointmentResponse = try await botSteps.scheduleRequest()
         } else {
-            logger.error("Tokens is empty \(botSteps.access_token)")
+            logger.error("Access Token is empty \(botSteps.access_token)")
+            await botSteps.shutdown()
         }
-        try await networkService.shutdown()
 
-        logger.info("\(botSteps.scheduleAppointmentResponse?.paymentLink)")
-        logger.info("\(botSteps.appointmentFullDetails(scriptTime: "00"))")
+
+        let elapsedTime = Date().timeIntervalSince(startTime)
+        logger.info("Total Elapsed time: \(elapsedTime) seconds")
+
+        logger.info("\(botSteps.scheduleAppointmentResponse?.paymentLink ?? "")")
+        logger.info("\(botSteps.appointmentFullDetails(scriptTime: elapsedTime.description))")
 
     } catch {
-        logger.info("Failed with error: \(error)")
-        try await networkService.shutdown()
+        logger.error("\(#function) Failed with error: \(error.localizedDescription)")
+        await botSteps.shutdown()
     }
 
-    let elapsedTime = Date().timeIntervalSince(startTime)
-    logger.info("Total Elapsed time: \(elapsedTime) seconds")
+    return
 
 }

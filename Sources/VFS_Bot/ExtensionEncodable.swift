@@ -15,3 +15,17 @@ import NIOFoundationCompat
 //        return buffer
 //    }
 //}
+
+
+extension Encodable {
+    func toQueryItems() throws -> [URLQueryItem] {
+        let encoder = JSONEncoder() // You can use any encoder that conforms to Encoder
+        let data = try encoder.encode(self)
+
+        guard let dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else {
+            throw EncodingError.invalidValue(self, EncodingError.Context(codingPath: [], debugDescription: "Failed to convert to dictionary"))
+        }
+
+        return dictionary.map { URLQueryItem(name: $0.key, value: String(describing: $0.value)) }
+    }
+}

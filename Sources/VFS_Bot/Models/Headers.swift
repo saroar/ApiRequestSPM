@@ -104,7 +104,7 @@ enum HTTPHeaderField: CaseIterable {
         request.headers.add(name: HTTPHeaderField.secCHUA.key, value: HTTPHeaderField.secCHUA.value)
         request.headers.add(name: HTTPHeaderField.secCHUAMobile.key, value: HTTPHeaderField.secCHUAMobile.value)
         request.headers.add(name: HTTPHeaderField.secCHUAPlatform.key, value: HTTPHeaderField.secCHUAPlatform.value)
-//        request.headers.add(name: HTTPHeaderField.acceptEncoding.key, value: HTTPHeaderField.acceptEncoding.value)
+        request.headers.add(name: HTTPHeaderField.acceptEncoding.key, value: HTTPHeaderField.acceptEncoding.value)
 
         // If optional headers are provided, add or replace them
         optionalHeaders?.forEach { (headerField, value) in

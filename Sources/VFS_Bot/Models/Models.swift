@@ -17,6 +17,11 @@ enum APIEndpoint: String {
     case appointmentApplicantOTP = "/appointment/applicantotp"
     case appointmentDownloadPDF = "/appointment/downloadpdf"
 
+    case getIP = "http://httpbin.org/ip"
+    case clientApplications = "http://167.99.251.49:8012/client_applications/api/client_applications"
+    case userAccounts = "http://167.99.251.49:8012/client_applications/api/user_logins"
+    case proxies = "http://167.99.251.49:8012/vfs_bot/api/proxies"
+
     var fullPath: String {
         return APIEndpoint.baseURL + rawValue
     }
@@ -50,62 +55,27 @@ struct ProxyData {
     }
 }
 
-enum SMSDetailType: Int {
+enum SMSDetailType: Int, Decodable {
     case online = 0
     case mobile = 1
     case gsmDevice = 2
 }
 
-struct UserMobileNumberDTO {
-    let dialCode: String
-    let mobileNumber: String
-    let type: SMSDetailType
-    let token: UUID
-    let description: String?
-}
+struct UserDTO: Decodable {
+    var id: Int
+    var username: String
+    var email: String
+    var first_name: String?
+    var last_name: String?
 
-struct UserLoginDTO {
-    let userMobileNumber: UserMobileNumberDTO?
-    let emailText: String
-    let vfsPassword: String
-    let mailPassword: String
-    let countryCode: String
-    let missionCode: String
-    let isReg: Bool
-    let isActive: Bool
-
-    init(userMobileNumber: UserMobileNumberDTO? = nil,
-         emailText: String,
-         vfsPassword: String,
-         mailPassword: String = "",
-         countryCode: String = "",
-         missionCode: String = "",
-         isReg: Bool = false,
-         isActive: Bool = false) {
-        self.userMobileNumber = userMobileNumber
-        self.emailText = emailText
-        self.vfsPassword = vfsPassword
-        self.mailPassword = mailPassword
-        self.countryCode = countryCode
-        self.missionCode = missionCode
-        self.isReg = isReg
-        self.isActive = isActive
-    }
-
-    func encriptedPassword() -> String? {
-        guard let password = PasswordEncript.getEncryptedPasswordBase64(password: self.vfsPassword)
-        else {
-            print("Isuuse is in password encript")
-            return nil
-        }
-
-        return password
+    var full_name: String {
+        return username + " \(first_name ?? "")  \(last_name ?? "")"
     }
 }
 
-struct ClientApplicationDTO {
+struct ClientApplicationDTO: Decodable {
     let id: Int
-    let userid: Int
+    let user: UserDTO
     let countryCode: String
     let visaCategoryCode: String
     let missionCode: String
@@ -117,31 +87,31 @@ struct ClientApplicationDTO {
     let lastName: String
     let gender: Int
     let nationalityCode: String
-    let dialCode: Int
+    let dialCode: String
     let contactNumber: String
     let addressline1: String?
     let passportNumber: String
-    let passportExpiryDate: Date
+    let passportExpirtyDate: Date
     let dateOfBirth: Date
     let fromDate: Date
     let toDate: Date
     let value: Int
     var emailId: String
-    let createdAt: Date
-    let updatedAt: Date
     let ipAddress: String?
     let urn: String?
     let arn: String?
     var loginUser: String?
     let isPaid: Bool
     let missionDetailId: String?
-    let deletedAt: Date?
     let referenceNumber: String?
     let middleName: String?
     let groupName: String?
     let note: String?
     let errorDescription: String?
     let bookingDate: Date?
+    let createdAt: Date
+    let updatedAt: Date
+    let deleted_at: Date?
 
 
     var full_name: String {
@@ -149,11 +119,22 @@ struct ClientApplicationDTO {
     }
 
     var full_contact_number: String {
-        "\(self.dialCode)" + self.contactNumber
+        self.dialCode + self.contactNumber
     }
 
 }
 
+public struct CAQuery: Encodable {
+
+    public var countryCode: CountryCode
+    public var missionCode: CountryCode
+
+    public init(countryCode: CountryCode, missionCode: CountryCode) {
+        self.countryCode = countryCode
+        self.missionCode = missionCode
+    }
+
+}
 
 /// appointment/CheckIsSlotAvailable'
 /// Response {"earliestDate":"04/04/2024 00:00:00","earliestSlotLists":[{"applicant":"1","date":"04/04/2024 00:00:00"}],"error":null}
@@ -167,3 +148,64 @@ struct ClientApplicationDTO {
 /// request "slotDate":"28/03/2024"
 
 
+// MARK: - UserAccount
+struct UserAccountDTO: Decodable {
+    let id: Int
+    let userMobileNumber: UserMobileNumberDTO
+    let emailText, vfsPassword, mailPassword, countryCode: String
+    let missionCode: String
+    let isReg, isActive: Bool
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case userMobileNumber = "user_mobile_number"
+        case emailText = "email_text"
+        case vfsPassword = "vfs_password"
+        case mailPassword = "mail_password"
+        case countryCode = "country_code"
+        case missionCode = "mission_code"
+        case isReg = "is_reg"
+        case isActive = "is_active"
+    }
+
+    func encriptedPassword() -> String? {
+        guard let password = PasswordEncrypt.getEncryptedPasswordBase64(password: self.vfsPassword)
+        else {
+            print("Isuuse is in password encript")
+            return nil
+        }
+
+        return password
+    }
+}
+
+// MARK: - UserMobileNumber
+struct UserMobileNumberDTO: Decodable {
+    let id, dialCode: Int
+    let mobileNumber: String
+    let type: SMSDetailType
+    let token: String
+    let description: String?
+    let createdAt: String
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case dialCode = "dial_code"
+        case mobileNumber = "mobile_number"
+        case type, token, description
+        case createdAt = "created_at"
+    }
+}
+
+
+struct ProxyDTO: Decodable {
+    let countryCode: String
+    let missionCode: String
+    let proxyList: [String]
+
+    enum CodingKeys: String, CodingKey {
+        case countryCode = "country_code"
+        case missionCode = "mission_code"
+        case proxyList = "proxy_list"
+    }
+}

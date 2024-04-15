@@ -105,54 +105,65 @@ extension Date {
     }
 }
 
-
 extension Date {
     func calculateStartDate() -> Date {
-        let calendar = Calendar.current
-        let today = Date()
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(secondsFromGMT: 0)!
 
-        // If the date is within the current month and has not occurred yet, add 1 day
-        if calendar.isDate(self, equalTo: today, toGranularity: .month) &&
-           calendar.isDate(self, equalTo: today, toGranularity: .year) &&
-           self > today {
+        // Determine if earliestDate is the last day of its month
+        let isLastDayOfMonth = calendar.isDate(self, equalTo: calendar.endOfMonth(for: self), toGranularity: .day)
+
+        logger.info("isDateInCurrentMonth \(calendar.isDateInCurrentMonth(self))")
+
+        if calendar.isDateInCurrentMonth(self) {
+
+            if isLastDayOfMonth {
+                return calendar.startOfFutureMonthFromLastDayCurrentMonth(for: self)
+            }
+
+            logger.info("Next Date")
             return calendar.date(byAdding: .day, value: 1, to: self)!
-        }
-        // If the date is the last day of the current month or in a past month, move to the next month's start
-        else if self <= today || self == calendar.endOfMonth(for: self) {
-            return calendar.startOfNextMonth(for: self)
-        }
-        // For future months, ensure to reset to the start of the given 'earliestDate's month
-        else {
+
+        } else {
             return calendar.startOfMonth(for: self)
         }
     }
 }
 
 extension Calendar {
-    func endOfMonth(for date: Date) -> Date {
-        let components = dateComponents([.year, .month], from: date)
-        let startOfMonth = self.date(from: components)!
-        let range = self.range(of: .day, in: .month, for: startOfMonth)!
-        let lastDay = range.upperBound - 1
-        return self.date(byAdding: .day, value: lastDay - 1, to: startOfMonth)!
+
+    func isDateInCurrentMonth(_ date: Date) -> Bool {
+        let calendar = Calendar.current
+        let currentDate = Date()
+
+        let currentComponents = calendar.dateComponents([.year, .month], from: currentDate)
+        let dateComponents = calendar.dateComponents([.year, .month], from: date)
+
+        return currentComponents.year == dateComponents.year && currentComponents.month == dateComponents.month
     }
 
-    func startOfMonth(for date: Date) -> Date {
-        let components = dateComponents([.year, .month], from: date)
+    func endOfMonth(for date: Date) -> Date {
+        var components = dateComponents([.year, .month], from: date)
+        components.month! += 1
+        components.day = 0 // Move to the last day of the previous month, which is the end of the current month
         return self.date(from: components)!
     }
 
-    func startOfNextMonth(for date: Date) -> Date {
+
+    func startOfMonth(for date: Date) -> Date {
         var components = dateComponents([.year, .month], from: date)
-        components.month! += 1
-        components.day = 1
-        if components.month! > 12 {
-            components.year! += 1
-            components.month = 1
-        }
+        components.day = 1 // Set to the first day of the month
+        return self.date(from: components)!
+    }
+
+    func startOfFutureMonthFromLastDayCurrentMonth(for date: Date) -> Date {
+        let calendar = Calendar.current
+        let nextMonthDate = calendar.date(byAdding: .month, value: 1, to: date)
+        let components = dateComponents([.year, .month], from: nextMonthDate!)
         return self.date(from: components)!
     }
 }
+// logger.error("\(#line) \(#function) gaurd becomde issue")
 
 //// Start measuring time
 //let startTime = Date()

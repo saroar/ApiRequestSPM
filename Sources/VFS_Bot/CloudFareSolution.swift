@@ -11,7 +11,7 @@ enum CaptchaSolutionStatus: String, Decodable {
 
 struct TaskTokenResponse: Decodable {
     let taskid: String
-    let status: CaptchaSolutionStatus
+    let status: CaptchaSolutionStatus?
     let token: String?
 }
 
@@ -23,6 +23,11 @@ struct TaskCap: Encodable {
 
 
 class LoginCFSolution {
+
+    enum LoginCFSError: Error {
+        case someErrors
+    }
+
     var CAPTCHA_SERVER = "http://solver.visabot.pro"  // Replace with your server URL
     var CHECKINTERVAL = 5  // Time in seconds to wait between checks
     var SOLVETIMEOUT = 120  // Time in seconds before giving up on solving
@@ -60,19 +65,19 @@ class LoginCFSolution {
         )
         configuration.httpVersion = .http1Only
 
-        if
-            let proxy = self.proxy,
-            let proxyData = ProxyData(from: proxy)
-        {
-            configuration.proxy = .server(
-                host: proxyData.host,
-                port: proxyData.port,
-                authorization: .basic(
-                    username: proxyData.username,
-                    password: proxyData.password
-                )
-            )
-        }
+//        if
+//            let proxy = self.proxy,
+//            let proxyData = ProxyData(from: proxy)
+//        {
+//            configuration.proxy = .server(
+//                host: proxyData.host,
+//                port: proxyData.port,
+//                authorization: .basic(
+//                    username: proxyData.username,
+//                    password: proxyData.password
+//                )
+//            )
+//        }
 
 
         // Initialize HTTP client with proxy configuration
@@ -83,16 +88,14 @@ class LoginCFSolution {
     private func getSolvedTask(ttResponse: TaskTokenResponse, start: Date) async throws -> TaskTokenResponse? {
         let httpClient = self.httpConfig()
 
-        guard let token = ttResponse.token else {
-            print("\(#function) Token is nil!")
-            return nil
-        }
 
         while true {
-            try? await Task.sleep(for: .seconds(5)) // 5 seconds
+
             do {
-                var request = HTTPClientRequest(url: "\(CAPTCHA_SERVER)/gettask/\(token)")
-                request.method = .POST
+                try await Task.sleep(for: .seconds(5)) // 5 seconds
+
+                var request = HTTPClientRequest(url: "\(CAPTCHA_SERVER)/gettask/\(ttResponse.taskid)")
+                request.method = .GET
                 request.headers.add(name: "Content-Type", value: "application/json")
 
                 let response = try await httpClient.execute(request, timeout: .seconds(30))
@@ -100,12 +103,8 @@ class LoginCFSolution {
                     let bodyData = try await response.body.collect(upTo: 1024 * 1024)
                     let data = Data(buffer: bodyData)
 
-                    if let jsonString = String(data: data, encoding: .utf8) {
-                        print("Raw JSON string: \(jsonString)")
-                    }
-
                     let ttRes = try JSONDecoder().decode(TaskTokenResponse.self, from: data)
-                    dump(ttRes)
+//                    dump(ttRes)
 
                     switch ttRes.status {
                         case .SOLVED:
@@ -120,11 +119,11 @@ class LoginCFSolution {
                             return nil
                     }
                 } else {
-                    print("Response issue: \(response)")
+                    logger.info("Response issue: \(response)")
                 }
 
             } catch {
-                print("getSolvedTask Errors: \(error)")
+                logger.error("\(#function) Errors: \(error)")
             }
         }
 
@@ -145,20 +144,26 @@ class LoginCFSolution {
             request.body = .bytes(bodyBuffer)
 
             let response = try await httpClient.execute(request, timeout: .seconds(30))
+            logger.info("ResStatus: \(response.status.code) - \(response.status.reasonPhrase)")
             if response.status == .ok{
 
                 let bodyData = try await response.body.collect(upTo: 1024 * 1024)
                 let data = Data(buffer: bodyData)
- 
+
                 let ttRes = try JSONDecoder().decode(TaskTokenResponse.self, from: data)
                 // dump(ttRes)
+
+
+                if ttRes.status == nil {
+                    return try await self.getSolvedTask(ttResponse: ttRes, start: startTime)
+                }
 
                 switch ttRes.status {
                     case .SOLVED:
                         try await httpClient.shutdown()
 
                         let elapsedTime = Date().timeIntervalSince(startTime)
-                        print("Captcha solver -/- Was solved in \(elapsedTime) seconds")
+                        logger.info("Captcha solver -/- Was solved in \(elapsedTime) seconds")
 
 //                        dump(ttRes)
                         return ttRes
@@ -168,12 +173,12 @@ class LoginCFSolution {
 
 
             } else {
-                print("Received non-OK status: \(response.status)")
+                logger.info("Received non-OK status: \(response.status)")
             }
 
         } catch {
             // handle error
-            print("Error: \(error)")
+            logger.error("\(#function) Error: \(error)")
         }
 
         try await httpClient.shutdown()
