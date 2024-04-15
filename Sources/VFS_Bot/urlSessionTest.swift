@@ -1,5 +1,4 @@
 import Foundation
-import Security
 
 func currentTime() -> String {
     let formatter = DateFormatter()
