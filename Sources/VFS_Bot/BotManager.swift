@@ -70,7 +70,7 @@ public struct BotManager {
 
     }
 
-    func run() async throws {
+    public func run() async throws {
         do {
             // Start both tasks concurrently
             let userAccounts = try await fetchUserAccounts()
