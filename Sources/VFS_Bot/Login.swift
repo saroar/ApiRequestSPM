@@ -128,7 +128,7 @@ struct Login {
             request.headers.add(name: "route", value: "\(countryCode)/en/\(missionCode)")
             request.headers.replaceOrAdd(name: "Content-Type", value: "application/x-www-form-urlencoded")
 
-            guard let password = PasswordEncrypt.getEncryptedPasswordBase64(password: vfs_password)
+            guard let password = PasswordEncrypt.getEncryptedPasswordBase64C(password: vfs_password)
             else {
                 print("Isuuse is in password encript")
                 try await httpClient.shutdown()
