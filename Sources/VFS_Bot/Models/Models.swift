@@ -169,7 +169,7 @@ struct UserAccountDTO: Decodable {
     }
 
     func encriptedPassword() -> String? {
-        guard let password = PasswordEncrypt.getEncryptedPasswordBase64(password: self.vfsPassword)
+        guard let password = PasswordEncrypt.getEncryptedPasswordBase64C(password: self.vfsPassword)
         else {
             print("Isuuse is in password encript")
             return nil

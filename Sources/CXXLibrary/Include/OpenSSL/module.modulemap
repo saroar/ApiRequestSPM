@@ -1,0 +1,6 @@
+module OpenSSL {
+    header "/usr/local/opt/openssl@3/include/openssl/rsa.h"
+    header "/usr/local/opt/openssl@3/include/openssl/pem.h"
+    header "/usr/local/opt/openssl@3/include/openssl/err.h"
+    export *
+}
