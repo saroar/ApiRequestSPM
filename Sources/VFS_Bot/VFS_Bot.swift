@@ -24,18 +24,20 @@ import AsyncHTTPClient
 //}
 
 func main_run(country: CountryCode, missionCode: CountryCode) async throws -> Void {
-    logger.info("Start main")
+    print("Start main")
 
     let httpClient = HTTPClient(eventLoopGroupProvider: .singleton)
-
     let networkService = NetworkService(httpClient: httpClient)
     let result = try await BotManager(
+        requestSleepSec: 180,
+        nanoseconds: 800_000_000, // 1_000_000_000 1 sec
+        caQuery: .init(countryCode: country, missionCode: missionCode),
         networkService: networkService,
-        caQuery: .init(countryCode: country, missionCode: missionCode)
+        telegramManager: .init(networkService: networkService)
     )
-    .run()
+    .run2()
 
-    logger.info("End main \(result)")
+    print("End main \(result)")
 
     return result
 }

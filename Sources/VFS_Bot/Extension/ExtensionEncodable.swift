@@ -28,4 +28,29 @@ extension Encodable {
 
         return dictionary.map { URLQueryItem(name: $0.key, value: String(describing: $0.value)) }
     }
+
+    func prettyPrinted() -> String {
+        let encoder = JSONEncoder()
+        encoder.setDateEncodingStrategy(.multipleFormatters([
+            DateFormatter.sharedDateMDYFormatter,
+            DateFormatter.sharedDateDMYFormatter,
+            DateFormatter.iso8601FormatterWithoutMilliseconds,
+            DateFormatter.iso8601FormatterWithMilliseconds,
+            DateFormatter.sharedDateMDYHMSFormatter,
+            DateFormatter.sharedDateFormatYMDFormatter,
+        ]))
+
+//        encoder.outputFormatting = .prettyPrinted
+
+        do {
+            let data = try encoder.encode(self)
+            if let jsonString = String(data: data, encoding: .utf8) {
+                return jsonString
+            } else {
+                return "Failed to convert JSON data to string."
+            }
+        } catch {
+            return "Failed to encode to JSON: \(error)"
+        }
+    }
 }

@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct CalendarPayload: Encodable {
+struct CalendarPayload: Codable {
     let missionCode: String
     let countryCode: String
     let centerCode: String
@@ -12,7 +12,7 @@ struct CalendarPayload: Encodable {
 }
 
 
-struct CalendarResponse: Decodable {
+struct CalendarResponse: Codable {
     let mission: String?
     let center: String?
     let visaCategory: String?
@@ -20,7 +20,7 @@ struct CalendarResponse: Decodable {
     let error: ErrorDetail?
 }
 
-struct CalendarDate: Decodable {
+struct CalendarDate: Codable {
     let date: Date
     let isWeekend: Bool
 }

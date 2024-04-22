@@ -1,33 +1,6 @@
 
 import Foundation
 
-enum APIEndpoint: String {
-    static let baseURL = "https://lift-api.vfsglobal.com"
-
-    case userLogin = "/user/login"
-    case appointmentApplication = "/appointment/application"
-    case checkSlotAvailability = "/appointment/CheckIsSlotAvailable"
-    case appointmentApplicants = "/appointment/applicants"
-    case appointmentFees = "/appointment/fees"
-    case appointmentCalendar = "/appointment/calendar"
-    case appointmentTimeSlot = "/appointment/timeslot"
-    case mapVAS = "/vas/mapvas"
-    case partnerServiceMap = "/vas/MapTMIPartnerService"
-    case appointmentSchedule = "/appointment/schedule"
-    case appointmentApplicantOTP = "/appointment/applicantotp"
-    case appointmentDownloadPDF = "/appointment/downloadpdf"
-
-    case getIP = "http://httpbin.org/ip"
-    case clientApplications = "http://167.99.251.49:8012/client_applications/api/client_applications"
-    case userAccounts = "http://167.99.251.49:8012/client_applications/api/user_logins"
-    case proxies = "http://167.99.251.49:8012/vfs_bot/api/proxies"
-
-    var fullPath: String {
-        return APIEndpoint.baseURL + rawValue
-    }
-
-}
-
 struct IPResponse: Codable {
     let origin: String
 }
@@ -122,7 +95,17 @@ struct ClientApplicationDTO: Decodable {
         self.dialCode + self.contactNumber
     }
 
+    var pdf_name: String {
+        "\(self.user.username)_\(self.firstName)_\(self.lastName).pdf"
+    }
+
+    var agent_name: String {
+        self.user.username
+    }
+
 }
+
+typealias ClientApplicationsDTO = [ClientApplicationDTO]
 
 public struct CAQuery: Encodable {
 
@@ -179,6 +162,8 @@ struct UserAccountDTO: Decodable {
     }
 }
 
+typealias UserAccountsDTO = [UserAccountDTO]
+
 // MARK: - UserMobileNumber
 struct UserMobileNumberDTO: Decodable {
     let id, dialCode: Int
@@ -208,4 +193,13 @@ struct ProxyDTO: Decodable {
         case missionCode = "mission_code"
         case proxyList = "proxy_list"
     }
+}
+
+
+struct PDFDownloadJSON: Codable {
+    let countryCode: String
+    let missionCode: String
+    let loginUser: String
+    let urn: String
+    var cultureCode: String = ""
 }

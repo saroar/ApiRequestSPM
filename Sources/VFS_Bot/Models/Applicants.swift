@@ -93,7 +93,7 @@ struct ApplicantListPayload: Encodable {
 //    languageCode: "en-US"
 //)
 
-struct ApplicantResponse: Decodable {
+struct ApplicantResponse: Codable {
     let urn: String?
     let applicantList: [ApplicantListResponse]?
     let status: String?

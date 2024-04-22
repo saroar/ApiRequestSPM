@@ -81,35 +81,34 @@ enum HTTPHeaderField: CaseIterable {
     }
 
 
-//    func defaultsHeasers(request: HTTPClient.Request, httpHeaderKey: HTTPHeaderField?, httpHeaderValue: String?) -> HTTPHeaders {
-    static func applyDefaultHeaders(
-        to request: inout HTTPClientRequest,
-        withOptionalHeaders optionalHeaders: [(HTTPHeaderField, String)]? = nil
-    ) {
+    static func applyVFSHeaders(withOptionalHeaders optionalHeaders: [(HTTPHeaderField, String)]? = nil) -> HTTPHeaders {
+        var headers = HTTPHeaders()
 
-        request.headers.add(name: HTTPHeaderField.host.key, value: HTTPHeaderField.host.value)
-        request.headers.add(name: HTTPHeaderField.authority.key, value: HTTPHeaderField.authority.value)
-        request.headers.add(name: HTTPHeaderField.accept.key, value: HTTPHeaderField.accept.value)
-        request.headers.add(name: HTTPHeaderField.acceptLanguage.key, value: HTTPHeaderField.acceptLanguage.value)
-        request.headers.add(name: HTTPHeaderField.cacheControl.key, value: HTTPHeaderField.cacheControl.value)
-        request.headers.add(name: HTTPHeaderField.connection.key, value: HTTPHeaderField.connection.value)
-        request.headers.add(name: HTTPHeaderField.dnt.key, value: HTTPHeaderField.dnt.value)
-        request.headers.add(name: HTTPHeaderField.origin.key, value: HTTPHeaderField.origin.value)
-        request.headers.add(name: HTTPHeaderField.pragma.key, value: HTTPHeaderField.pragma.value)
-        request.headers.add(name: HTTPHeaderField.referer.key, value: HTTPHeaderField.referer.value)
-        request.headers.add(name: HTTPHeaderField.secFetchDest.key, value: HTTPHeaderField.secFetchDest.value)
-        request.headers.add(name: HTTPHeaderField.secFetchMode.key, value: HTTPHeaderField.secFetchMode.value)
-        request.headers.add(name: HTTPHeaderField.secFetchSite.key, value: HTTPHeaderField.secFetchSite.value)
-        request.headers.add(name: HTTPHeaderField.userAgent.key, value: HTTPHeaderField.userAgent.value)
-        request.headers.add(name: HTTPHeaderField.secCHUA.key, value: HTTPHeaderField.secCHUA.value)
-        request.headers.add(name: HTTPHeaderField.secCHUAMobile.key, value: HTTPHeaderField.secCHUAMobile.value)
-        request.headers.add(name: HTTPHeaderField.secCHUAPlatform.key, value: HTTPHeaderField.secCHUAPlatform.value)
-        request.headers.add(name: HTTPHeaderField.acceptEncoding.key, value: HTTPHeaderField.acceptEncoding.value)
+        // Default headers
+        headers.add(name: HTTPHeaderField.host.key, value: HTTPHeaderField.host.value)
+        headers.add(name: HTTPHeaderField.authority.key, value: HTTPHeaderField.authority.value)
+        headers.add(name: HTTPHeaderField.accept.key, value: HTTPHeaderField.accept.value)
+        headers.add(name: HTTPHeaderField.acceptLanguage.key, value: HTTPHeaderField.acceptLanguage.value)
+        headers.add(name: HTTPHeaderField.cacheControl.key, value: HTTPHeaderField.cacheControl.value)
+        headers.add(name: HTTPHeaderField.connection.key, value: HTTPHeaderField.connection.value)
+        headers.add(name: HTTPHeaderField.dnt.key, value: HTTPHeaderField.dnt.value)
+        headers.add(name: HTTPHeaderField.origin.key, value: HTTPHeaderField.origin.value)
+        headers.add(name: HTTPHeaderField.pragma.key, value: HTTPHeaderField.pragma.value)
+        headers.add(name: HTTPHeaderField.referer.key, value: HTTPHeaderField.referer.value)
+        headers.add(name: HTTPHeaderField.secFetchDest.key, value: HTTPHeaderField.secFetchDest.value)
+        headers.add(name: HTTPHeaderField.secFetchMode.key, value: HTTPHeaderField.secFetchMode.value)
+        headers.add(name: HTTPHeaderField.secFetchSite.key, value: HTTPHeaderField.secFetchSite.value)
+        headers.add(name: HTTPHeaderField.userAgent.key, value: HTTPHeaderField.userAgent.value)
+        headers.add(name: HTTPHeaderField.secCHUA.key, value: HTTPHeaderField.secCHUA.value)
+        headers.add(name: HTTPHeaderField.secCHUAMobile.key, value: HTTPHeaderField.secCHUAMobile.value)
+        headers.add(name: HTTPHeaderField.secCHUAPlatform.key, value: HTTPHeaderField.secCHUAPlatform.value)
+        headers.add(name: HTTPHeaderField.acceptEncoding.key, value: HTTPHeaderField.acceptEncoding.value)
 
-        // If optional headers are provided, add or replace them
-        optionalHeaders?.forEach { (headerField, value) in
-            request.headers.replaceOrAdd(name: headerField.key, value: value)
+        // Optional headers
+        optionalHeaders?.forEach { headerField, value in
+            headers.replaceOrAdd(name: headerField.key, value: value)
         }
 
+        return headers
     }
 }

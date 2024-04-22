@@ -1,29 +1,52 @@
 
 import Foundation
 
-enum PaymentMode: String, Encodable {
+enum PaymentMode: String, Codable {
     case VAC, Online
 }
 
-struct SchedulePayload: Encodable {
+struct SchedulePayload: Codable {
     let missionCode: String
     let countryCode: String
     let centerCode: String
     let loginUser: String
     let urn: String
-    let notificationType: String = "none"
+    var notificationType: String = "none"
     let paymentdetails: PaymentDetails
     let allocationId: String
     let CanVFSReachoutToApplicant: Bool
 }
 
-struct PaymentDetails: Encodable {
+struct PaymentDetails: Codable {
+
     let paymentmode: PaymentMode
-    let RequestRefNo: String = ""
-    let clientId: String = ""
-    let merchantId: String = ""
+    var RequestRefNo: String = ""
+    var clientId: String = ""
+    var merchantId: String = ""
     let amount: Double
     let currency: String
+    
+    init(
+        paymentmode: PaymentMode,
+        RequestRefNo: String = "",
+        clientId: String = "",
+        merchantId: String = "",
+        amount: Double,
+        currency: String
+    ) {
+
+//        let feeAmount = feeDetailsFirst?.feeAmount ?? 0.0
+//        let paymentmode: PaymentMode = feeAmount == 0.0 ? .VAC : .Online
+//        let currency = feeDetailsFirst?.currency ?? ""
+
+        self.paymentmode = paymentmode
+        self.RequestRefNo = RequestRefNo
+        self.clientId = clientId
+        self.merchantId = merchantId
+        self.amount = amount
+        self.currency = currency
+    }
+
 }
 
 

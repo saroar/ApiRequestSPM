@@ -113,15 +113,12 @@ extension Date {
         // Determine if earliestDate is the last day of its month
         let isLastDayOfMonth = calendar.isDate(self, equalTo: calendar.endOfMonth(for: self), toGranularity: .day)
 
-        logger.info("isDateInCurrentMonth \(calendar.isDateInCurrentMonth(self))")
-
         if calendar.isDateInCurrentMonth(self) {
 
             if isLastDayOfMonth {
                 return calendar.startOfFutureMonthFromLastDayCurrentMonth(for: self)
             }
 
-            logger.info("Next Date")
             return calendar.date(byAdding: .day, value: 1, to: self)!
 
         } else {

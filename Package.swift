@@ -18,9 +18,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/apple/swift-nio.git", from: "2.38.0"),
         .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.9.0"),
-        .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0"),
-        .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", from: "1.8.2"),
-        .package(url: "https://github.com/apple/swift-crypto.git", from: "2.0.0")  // Added missing dependency for swift-crypto
+        .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0")
     ],
     targets: [
         .target(
@@ -29,8 +27,6 @@ let package = Package(
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "NIOCore", package: "swift-nio"),
                 .product(name: "AsyncHTTPClient", package: "async-http-client"),
-                .product(name: "Crypto", package: "swift-crypto"),
-                .product(name: "CryptoSwift", package: "CryptoSwift"),
                 "CXXLibrary"
             ],
             path: "Sources/VFS_Bot"

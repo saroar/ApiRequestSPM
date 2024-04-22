@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct ErrorDetail: Decodable {
+struct ErrorDetail: Codable {
     let code: Int
     let description: String
 }

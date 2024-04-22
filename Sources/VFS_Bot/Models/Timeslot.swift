@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct TimeslotsPayload: Encodable {
+struct TimeslotsPayload: Codable {
     let missionCode: String
     let countryCode: String
     let centerCode: String
@@ -13,7 +13,7 @@ struct TimeslotsPayload: Encodable {
 
 
 // MARK: - TimeslotsResponse
-struct TimeslotsResponse: Decodable {
+struct TimeslotsResponse: Codable {
     let mission, center, visacategory: String
     let date: Date
     let slots: [Slot]
@@ -21,7 +21,7 @@ struct TimeslotsResponse: Decodable {
 }
 
 // MARK: - Slot
-struct Slot: Decodable {
+struct Slot: Codable {
     let visaGroupName: String
     let allocationId: Int
     let slot, type, allocationCategory, categoryCode: String
