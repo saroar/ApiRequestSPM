@@ -200,7 +200,7 @@ extension VisaApplicationManagerClient {
                     _ = try await checkSlotAvailableRequest(accessToken)
                     count += 1
                     let seconds = Double(nanoseconds) / 1_000_000_000.0
-                    logger.info("Retry in \(String(format: "%.2f", seconds)) seconds, count: \(count)")
+                    logger.info("Retry in \(String(format: "%.2f", seconds)) seconds, count: \(count) - \(networkService)")
 
                 }
 
@@ -208,7 +208,6 @@ extension VisaApplicationManagerClient {
             },
 
             applicantRequest: { accessToken, earliestDate in
-
 
         //        if earliestDate > self.client_application_dto.toDate {
         //            logger.warning("Out of the range earliestDate: \(earliestDate) todate: \(self.client_application_dto.toDate)")

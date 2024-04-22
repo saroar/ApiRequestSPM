@@ -40,14 +40,18 @@ extension LoginCFSolutionClient {
         proxy: String?
     ) -> Self {
 
-        let SITE_KEY = "0x4AAAAAAACYaM3U_Dz-4DN1"
-        let TWO_CAPTCHA_API_KEY = "46a156067a1b78a020e659c459c12cdd"
-        let userkey = "a6a8b491e2bc4d588b8051e41329ccaf"
+        let env = ProcessInfo.processInfo.environment
+        guard 
+            let SITE_KEY = env["SITE_KEY"],
+            let USER_KEY = env["USER_KEY"]
+        else {
+            fatalError("SITE_KEY is Missiing!")
+        }
 
         let CAPTCHA_SERVER = "http://solver.visabot.pro"  // Replace with your server URL
         let logger = Logger(label: "com.cfSolution.main")
 
-        let task = TaskCap(sitekey: SITE_KEY, url: urlString, userkey: userkey)
+        let task = TaskCap(sitekey: SITE_KEY, url: urlString, userkey: USER_KEY)
 
         // Start measuring time
         let startTime = Date()

@@ -67,9 +67,8 @@ struct TelegramManagerClient {
 
 extension TelegramManagerClient {
 
-    public static func live(
-        networkService: NetworkService
-    ) -> Self {
+    public static func live(networkService: NetworkService) -> Self {
+        
         let logger: Logger = .init(label: "com.telegram.main")
 
         let iso_to_chat_id = [
@@ -81,7 +80,10 @@ extension TelegramManagerClient {
             // Add other mappings as needed
         ]
 
-        let botToken = "6268203001:AAFuSe5hk_0GGesecQznF3OLDPMJpdoXGrQ"
+        let env = ProcessInfo.processInfo.environment
+        guard let TLGM_TOKEN = env["TELEGRAM_TOKEN"] else {
+            fatalError("TOKEN is Missiing!")
+        }
 
         return Self(
             sendMessage: { countryCode, message in
@@ -94,7 +96,7 @@ extension TelegramManagerClient {
 //                     logger.info("\(tsmPayload.toJSONString())")
 
                     let _: EmptyResponse = try await networkService.request(
-                        endpoint: .telegram(botToken: botToken, method: .sendMessage),
+                        endpoint: .telegram(botToken: TLGM_TOKEN, method: .sendMessage),
                         method: .POST,
                         headers: [HTTPHeaderField.contentType.key: "application/json"],
                         queryParameters: tsmPayload
@@ -135,7 +137,7 @@ extension TelegramManagerClient {
                         body.writeString("\r\n--\(boundary)--\r\n")
 
                         let _: EmptyResponse = try await networkService.request(
-                            endpoint: .telegram(botToken: botToken, method: .sendDocument),
+                            endpoint: .telegram(botToken: TLGM_TOKEN, method: .sendDocument),
                             method: .POST,
                             headers: [HTTPHeaderField.contentType.key: "multipart/form-data; boundary=\(boundary)"],
                             body: body

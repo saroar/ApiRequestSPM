@@ -64,8 +64,6 @@ public class NetworkService {
             throw NetworkServiceError.urlBuildFailed
         }
 
-        print("finalURL", finalURL)
-
         var request = HTTPClientRequest(url: finalURL.absoluteString)
         request.method = method
         request.headers = headers
@@ -92,7 +90,8 @@ public class NetworkService {
 //            }
 //        }
         
-        logger.info("URL: \(endpoint.path) Res Status: \(response.status.code) - \(response.status.reasonPhrase)")
+        let route = request.headers[HTTPHeaderField.route.key].last ?? ""
+        logger.info("URL: \(endpoint.path) Res Status: \(response.status.code) - \(response.status.reasonPhrase) -> Route: \(route)")
 
         do {
             let decoder = JSONDecoder()
