@@ -245,7 +245,7 @@ public struct BotManager {
             logger.info("PDF saved successfully at \(fileURL.path)")
             _ = try await tmc.sendDocument(
                 .UZBEKISTAN,
-                URL(fileURLWithPath: fileURL.path())
+                URL(fileURLWithPath: fileURL.path)
             )
 
         } catch {
@@ -512,7 +512,7 @@ public struct BotManager {
                     logger.info("PDF saved successfully at \(fileURL.path)")
                     _ = try await tmc.sendDocument(
                         .UZBEKISTAN,
-                        URL(fileURLWithPath: fileURL.path())
+                        URL(fileURLWithPath: fileURL.path)
                     )
 
                 } catch {

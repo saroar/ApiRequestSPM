@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "ikigajson",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/orlandos-nl/IkigaJSON.git",
+      "state" : {
+        "revision" : "79377692e30b7d96f65e5286b1ad9b160e297ffc",
+        "version" : "2.2.2"
+      }
+    },
+    {
       "identity" : "swift-algorithms",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-algorithms",
