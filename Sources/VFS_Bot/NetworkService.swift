@@ -27,7 +27,7 @@ public class NetworkService {
         }
     }
 
-    func request<T: Decodable>(
+    public func request<T: Decodable>(
         endpoint: APIEndpoint,
         method: HTTPMethod,
         headers: HTTPHeaders,
@@ -80,14 +80,13 @@ public class NetworkService {
         let bodyData = try await response.body.collect(upTo: maxSize)
         let data = Data(buffer: bodyData)
 
-//        if endpoint.path == "/vfs_bot/api/missions" {
-//            if let rawResponseString = String(data: data, encoding: .utf8) {
-//                logger.info("Raw response string: \(rawResponseString)")
-//            } else if let rawResponseString = String(data: data, encoding: .isoLatin1) {
-//                logger.info("Raw response string with ISO-8859-1: \(rawResponseString)")
-//            } else {
-//                logger.info("Failed to convert response data to string")
-//            }
+
+//        if let rawResponseString = String(data: data, encoding: .utf8) {
+//            logger.info("Raw response string: \(rawResponseString)")
+//        } else if let rawResponseString = String(data: data, encoding: .isoLatin1) {
+//            logger.info("Raw response string with ISO-8859-1: \(rawResponseString)")
+//        } else {
+//            logger.info("Failed to convert response data to string")
 //        }
         
         let route = request.headers[HTTPHeaderField.route.key].last ?? ""

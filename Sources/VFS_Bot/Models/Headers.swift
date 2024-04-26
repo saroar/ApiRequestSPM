@@ -3,10 +3,11 @@ import NIOHTTP1
 import Foundation
 import AsyncHTTPClient
 
-enum HTTPHeaderField: CaseIterable {
+public enum HTTPHeaderField: CaseIterable {
     case host
     case authority
     case authorize
+    case clientSource
     case accept
     case acceptLanguage
     case cacheControl
@@ -27,7 +28,7 @@ enum HTTPHeaderField: CaseIterable {
     case acceptEncoding
     case secGpc
 
-    var key: String {
+    public var key: String {
         switch self {
             case .host: return "Host"
             case .authority: return "authority"
@@ -51,16 +52,17 @@ enum HTTPHeaderField: CaseIterable {
             case .route: return "route"
             case .acceptEncoding: return "Accept-Encoding"
             case .secGpc: return "sec-gpc"
+            case .clientSource: return "cientSource"
         }
     }
 //    Accept-Language: en-GB,en;q=0.9
 
-    var value: String {
+    public var value: String {
         switch self {
             case .host, .authority: return "lift-api.vfsglobal.com"
             case .authorize: return ""
             case .accept: return "application/json, text/plain, */*"
-            case .acceptLanguage: return "en-GB"
+            case .acceptLanguage: return "en-GB,en-US;q=0.9,en;q=0.8"
             case .cacheControl, .pragma: return "no-cache"
             case .connection: return "keep-alive"
             case .dnt: return "1"
@@ -77,6 +79,7 @@ enum HTTPHeaderField: CaseIterable {
             case .route: return "uzb/en/ltp"
             case .acceptEncoding: return "gzip, deflate"
             case .secGpc: return "1"
+            case .clientSource: return "clientSource"
         }
     }
 

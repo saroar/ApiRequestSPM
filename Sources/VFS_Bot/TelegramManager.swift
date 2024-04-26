@@ -82,7 +82,7 @@ extension TelegramManagerClient {
 
         let env = ProcessInfo.processInfo.environment
         guard let TLGM_TOKEN = env["TELEGRAM_TOKEN"] else {
-            fatalError("TOKEN is Missiing!")
+            fatalError("TELEGRAM_TOKEN is Missiing!")
         }
 
         return Self(

@@ -1,9 +1,8 @@
 import Foundation
 
+public enum APIEndpoint {
 
-enum APIEndpoint {
-
-    enum TelegramMethod: String {
+    public enum TelegramMethod: String {
         case sendMessage = "sendMessage"
         case sendDocument = "sendDocument"
         // Add more methods as needed

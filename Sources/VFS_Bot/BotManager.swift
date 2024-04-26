@@ -33,7 +33,7 @@ public struct BotManager {
         self.nanoseconds = nanoseconds
         self.caQuery = caQuery
         self.networkService = networkService
-        self.telegramManager =  telegramManager //.init(networkService: networkService)
+        self.telegramManager =  telegramManager
     }
 
     private func fetchProxies() async throws -> ProxyDTO {
@@ -94,7 +94,7 @@ public struct BotManager {
 
     }
 
-    public func run2() async throws {
+    public func run() async throws {
 
         let userAccounts = try await fetchUserAccounts()
         // dump(userAccount)
@@ -115,14 +115,17 @@ public struct BotManager {
 
             for idx in 0...numProxies {
                 let randomValue = Int.random(in: 1...100)
-                let account = userAccounts[idx % numAccounts]
+//                let account = userAccounts[idx % numAccounts]
 
-                // let account = userAccounts[idx % numAccounts]
+//                let proxy = proxyList[idx % numProxies]
+//                let account = userAccounts[idx % numAccounts]
                 let clientApplication = clientApplications[idx % numClientApplications]
-                let proxy = proxyList[idx % numProxies]
+
+                let account = userAccounts[randomValue % numAccounts]
+                let proxy = proxyList[randomValue % numProxies]
 
                 Task {
-                    try await setupAndStart2(
+                    try await setupAndStart(
                         proxy: proxy,
                         user_account_dto: account,
                         client_application_dto: clientApplication
@@ -252,12 +255,11 @@ public struct BotManager {
 
     }
 
-    func setupAndStart2(
+    func setupAndStart(
         proxy: String,
         user_account_dto: UserAccountDTO,
         client_application_dto: ClientApplicationDTO
     ) async throws -> Void {
-
 
         let proxyUrl = proxy
 
@@ -350,11 +352,14 @@ public struct BotManager {
             let loginResponse = try await vamClient.loginRequest()
 
             guard let lr = loginResponse, let token = lr.accessToken else {
+                logger.error("Login issue with \(loginResponse?.error)")
                 throw BMError.tokenMission
             }
 
             // Start measuring time
             let startTime = Date()
+
+            let application = try await vamClient.applicationRequest(token)
 
             let earliestDateSlotsResponse = try await vamClient.checkSlotsAvilableWithLoop(token)
 

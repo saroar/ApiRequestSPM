@@ -140,8 +140,23 @@ extension VisaApplicationManagerClient {
             loginRequest: {
                 logger.info("\(#function.capitalized) Start...")
 
+                func currentTime() -> String {
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+                    dateFormatter.dateFormat = "'GA;'yyyy-MM-dd'T'HH:mm:ss'Z'"
+                    return dateFormatter.string(from: Date())
+                }
+
+                let currentTime = currentTime()
+                guard let clientsource = PasswordEncrypt.getEncryptedPasswordBase64C(password: currentTime) else {
+                    logger.error("Clientsource is Missing")
+                    throw VAMCError.missionToken
+                }
+
+
                 let additionalHeaders = [
                     (HTTPHeaderField.route, route),
+                    (HTTPHeaderField.clientSource, clientsource),
                     (HTTPHeaderField.contentType, "application/x-www-form-urlencoded"),
                     (HTTPHeaderField.acceptEncoding, "gzip, deflate")
                 ]
@@ -166,9 +181,23 @@ extension VisaApplicationManagerClient {
 
             applicationRequest: { accessToken in
 
+                func currentTime() -> String {
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+                    dateFormatter.dateFormat = "'CC;'yyyy-MM-dd'T'HH:mm:ss'Z'"
+                    return dateFormatter.string(from: Date())
+                }
+
+                let currentTime = currentTime()
+                guard let clientsource = PasswordEncrypt.getEncryptedPasswordBase64C(password: currentTime) else {
+                    logger.error("Clientsource is Missing")
+                    throw VAMCError.missionToken
+                }
+
                 let additionalHeaders = [
                     (HTTPHeaderField.route, route),
                     (HTTPHeaderField.authorize, accessToken),
+                    (HTTPHeaderField.clientSource, clientsource),
                     (HTTPHeaderField.contentType, "application/json;charset=UTF-8"),
                 ]
 

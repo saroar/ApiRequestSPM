@@ -18,7 +18,8 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/apple/swift-nio.git", from: "2.38.0"),
         .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.9.0"),
-        .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0")
+        .package(url: "https://github.com/apple/swift-log.git", from: "1.0.0"),
+        .package(url: "https://github.com/orlandos-nl/IkigaJSON.git", from: "2.0.0"),
     ],
     targets: [
         .target(
@@ -27,9 +28,13 @@ let package = Package(
                 .product(name: "Logging", package: "swift-log"),
                 .product(name: "NIOCore", package: "swift-nio"),
                 .product(name: "AsyncHTTPClient", package: "async-http-client"),
+                .product(name: "IkigaJSON", package: "IkigaJSON"),
                 "CXXLibrary"
             ],
-            path: "Sources/VFS_Bot"
+            path: "Sources/VFS_Bot",
+            swiftSettings: [
+              .enableUpcomingFeature("StrictConcurrency")
+            ]
         ),
         .target(
             name: "CXXLibrary",

@@ -35,7 +35,7 @@ func main_run(country: CountryCode, missionCode: CountryCode) async throws -> Vo
         networkService: networkService,
         telegramManager: .init(networkService: networkService)
     )
-    .run2()
+    .run()
 
     print("End main \(result)")
 
